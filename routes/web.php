@@ -31,6 +31,12 @@ Route::get("/", [SurveyController::class, "index"])->name("index");
 Route::prefix("survey")->name("survey.")->group(function () {
 
     Route::post("submit-user-info",[SurveyController::class,"submitUserInfo"])->name("submit-user-info");
+
+    Route::get("questions",[SurveyController::class,"questions"])->name("questions");
+    Route::get("possible-answers",[SurveyController::class,"possibleAnswers"])->name("possible-answers");
+
+    Route::post("submit-answers",[SurveyController::class,"submitAnswers"])->name("submit-answers");
+
 });
 
 Auth::routes();

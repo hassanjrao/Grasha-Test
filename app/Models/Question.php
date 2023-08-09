@@ -11,6 +11,8 @@ class Question extends Model
 
     protected $guarded=[];
 
+    protected $append=["question"];
+
     public function learningStyle()
     {
         return $this->belongsTo(LearningStyle::class);
@@ -21,5 +23,13 @@ class Question extends Model
             "tutor" => "tutor",
             "student" => "student",
         ];
+    }
+
+    public function responses(){
+        return $this->hasMany(UserResponse::class,"question_id");
+    }
+
+    public function getQuestionAttribute(){
+        return $this->{"question_".app()->getLocale()};
     }
 }

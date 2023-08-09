@@ -58,6 +58,11 @@
           </v-row>
         </v-card-text>
       </v-card>
+
+      <v-divider></v-divider>
+
+      <Question :user="user" v-if="user" ></Question>
+
     </v-container>
   </v-app>
 </template>
@@ -65,6 +70,8 @@
 <script>
 import { required, requiredIf, email } from "vuelidate/lib/validators";
 import alert from '../../shared/alert'
+
+import Question from "./Question.vue";
 
 export default {
   validations: {
@@ -118,7 +125,7 @@ export default {
       useInfoDisabled: false,
       submitUserInfoLoading: false,
       baseURL: "/survey",
-      userId:null,
+      user:null,
     };
   },
 
@@ -143,9 +150,11 @@ export default {
 
           this.submitUserInfoLoading = false;
 
-          this.userId = response.data.data.user.id;
+          this.user = response.data.data.user;
 
-          console.log("userId",this.userId);
+          this.user.type = this.userInfo.type.toLowerCase();
+
+          console.log("user",this.user);
 
           this.showStatus(response.data.message, "success");
 
@@ -155,8 +164,13 @@ export default {
         .catch((error) => {
           console.log(error);
           this.submitUserInfoLoading = false;
+            this.showStatus(error.response.data.message, "error");
         });
     },
   },
+
+  components:{
+    Question
+  }
 };
 </script>

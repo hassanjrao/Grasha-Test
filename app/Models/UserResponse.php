@@ -25,4 +25,5 @@ class UserResponse extends Model
     {
         return $this->belongsTo(Question::class);
     }
+
 }
