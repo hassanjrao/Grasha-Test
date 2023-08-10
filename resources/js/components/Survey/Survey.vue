@@ -13,7 +13,7 @@
                 :items="['Student', 'Tutor']"
                 label="Student/Tutor"
                 required
-                :disabled="useInfoDisabled"
+                disabled
                 @input="$v.userInfo.type.$touch()"
                 :error-messages="userTypeErrors"
                 @blur="$v.userInfo.type.$touch()"
@@ -61,8 +61,7 @@
 
       <v-divider></v-divider>
 
-      <Question :user="user" v-if="user" ></Question>
-
+      <Question :user="user" v-if="user"></Question>
     </v-container>
   </v-app>
 </template>
@@ -74,6 +73,14 @@ import alert from '../../shared/alert'
 import Question from "./Question.vue";
 
 export default {
+
+    props:{
+        type:{
+            type:String,
+            required:true
+        }
+    },
+
   validations: {
     userInfo: {
       type: {
@@ -113,6 +120,9 @@ export default {
 
   created() {
     this.showStatus = alert.showStatus;
+
+    this.userInfo.type = this.type;
+    console.log("type",this.type);
   },
   data() {
     return {

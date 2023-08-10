@@ -4,7 +4,7 @@
       <v-card-text>
         <v-row>
           <v-col cols="12" sm="12" md="12">
-            <v-progress-linear striped v-model="progress" color="blue-grey" height="25">
+            <v-progress-linear disabled striped :value="progress" color="primary" height="25">
               <template v-slot:default="{ value }">
                 <strong>{{ Math.ceil(value) }}%</strong>
               </template>
@@ -14,7 +14,7 @@
 
         <v-divider></v-divider>
 
-        <v-row>
+        <v-row v-if="!userLearningStyle">
           <v-col cols="12" sm="12" md="12">
             <v-card
               v-for="(question, questionIndex) in questions"
@@ -45,7 +45,7 @@
           </v-col>
         </v-row>
 
-        <v-row class="justify-content-end">
+        <v-row class="justify-content-end" v-if="!userLearningStyle">
           <!-- sumbit -->
 
           <v-col cols="12" sm="6" md="4" class="text-end">
@@ -54,6 +54,27 @@
             >
           </v-col>
         </v-row>
+
+
+        <v-row v-if="userLearningStyle">
+
+            <v-col cols="12" sm="12" md="12">
+                <v-card>
+                <v-card-title>
+                    Your Learning Style
+                </v-card-title>
+                <v-card-text>
+                    <p>
+                    <strong>{{ userLearningStyle.info }}</strong>
+                    </p>
+                    <!-- image -->
+                    <v-img :src="userLearningStyle.image" ></v-img>
+                </v-card-text>
+                </v-card>
+            </v-col>
+
+        </v-row>
+
       </v-card-text>
     </v-card>
   </v-app>
@@ -89,6 +110,7 @@ export default {
       baseURL: "/survey",
       questions: [],
       possibleAnswers: [],
+      userLearningStyle: null,
     };
   },
 
@@ -105,6 +127,7 @@ export default {
         })
         .then((response) => {
           this.questions = response.data.data.questions;
+
 
           console.log("Questions", this.questions);
         })
@@ -159,6 +182,8 @@ export default {
 
           // scroll to top
           window.scrollTo(0, 0);
+
+          this.userLearningStyle = response.data.data.userLearningStyle;
 
           //   reset validation
           this.$v.$reset();

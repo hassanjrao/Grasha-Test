@@ -5,7 +5,7 @@
 
 
     <div class="content mb-4">
-        <survey-form/>
+        <survey-form :type="'{{ $type }}'"/>
     </div>
 
 

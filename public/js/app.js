@@ -5120,7 +5120,8 @@ __webpack_require__.r(__webpack_exports__);
       limit: 10,
       baseURL: "/survey",
       questions: [],
-      possibleAnswers: []
+      possibleAnswers: [],
+      userLearningStyle: null
     };
   },
   methods: {
@@ -5178,7 +5179,8 @@ __webpack_require__.r(__webpack_exports__);
         _this3.progress = response.data.data.progress;
         _this3.loading = false; // scroll to top
 
-        window.scrollTo(0, 0); //   reset validation
+        window.scrollTo(0, 0);
+        _this3.userLearningStyle = response.data.data.userLearningStyle; //   reset validation
 
         _this3.$v.$reset();
       })["catch"](function (error) {
@@ -5217,6 +5219,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    type: {
+      type: String,
+      required: true
+    }
+  },
   validations: {
     userInfo: {
       type: {
@@ -5254,6 +5262,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.showStatus = _shared_alert__WEBPACK_IMPORTED_MODULE_0__.default.showStatus;
+    this.userInfo.type = this.type;
+    console.log("type", this.type);
   },
   data: function data() {
     return {
@@ -5337,8 +5347,10 @@ var render = function render() {
     }
   }, [_c("v-progress-linear", {
     attrs: {
+      disabled: "",
       striped: "",
-      color: "blue-grey",
+      value: _vm.progress,
+      color: "primary",
       height: "25"
     },
     scopedSlots: _vm._u([{
@@ -5347,15 +5359,8 @@ var render = function render() {
         var value = _ref.value;
         return [_c("strong", [_vm._v(_vm._s(Math.ceil(value)) + "%")])];
       }
-    }]),
-    model: {
-      value: _vm.progress,
-      callback: function callback($$v) {
-        _vm.progress = $$v;
-      },
-      expression: "progress"
-    }
-  })], 1)], 1), _vm._v(" "), _c("v-divider"), _vm._v(" "), _c("v-row", [_c("v-col", {
+    }])
+  })], 1)], 1), _vm._v(" "), _c("v-divider"), _vm._v(" "), !_vm.userLearningStyle ? _c("v-row", [_c("v-col", {
     attrs: {
       cols: "12",
       sm: "12",
@@ -5390,7 +5395,7 @@ var render = function render() {
     }), 1), _vm._v(" "), _vm.v.selectedAnswer.$dirty ? _c("div", [!_vm.v.selectedAnswer.required ? _c("p", {
       staticClass: "text-danger"
     }, [_vm._v("\n                  Please select an answer.\n                ")]) : _vm._e()]) : _vm._e()], 1)], 1);
-  }), 1)], 1), _vm._v(" "), _c("v-row", {
+  }), 1)], 1) : _vm._e(), _vm._v(" "), !_vm.userLearningStyle ? _c("v-row", {
     staticClass: "justify-content-end"
   }, [_c("v-col", {
     staticClass: "text-end",
@@ -5407,7 +5412,17 @@ var render = function render() {
     on: {
       click: _vm.submitAnswers
     }
-  }, [_vm._v("Submit & Next")])], 1)], 1)], 1)], 1)], 1);
+  }, [_vm._v("Submit & Next")])], 1)], 1) : _vm._e(), _vm._v(" "), _vm.userLearningStyle ? _c("v-row", [_c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "12",
+      md: "12"
+    }
+  }, [_c("v-card", [_c("v-card-title", [_vm._v("\n                  Your Learning Style\n              ")]), _vm._v(" "), _c("v-card-text", [_c("p", [_c("strong", [_vm._v(_vm._s(_vm.userLearningStyle.info))])]), _vm._v(" "), _c("v-img", {
+    attrs: {
+      src: _vm.userLearningStyle.image
+    }
+  })], 1)], 1)], 1)], 1) : _vm._e()], 1)], 1)], 1);
 };
 
 var staticRenderFns = [];
@@ -5451,7 +5466,7 @@ var render = function render() {
       items: ["Student", "Tutor"],
       label: "Student/Tutor",
       required: "",
-      disabled: _vm.useInfoDisabled,
+      disabled: "",
       "error-messages": _vm.userTypeErrors
     },
     on: {
@@ -5663,7 +5678,7 @@ vue__WEBPACK_IMPORTED_MODULE_2__.default.use((vuetify__WEBPACK_IMPORTED_MODULE_3
   theme: {
     themes: {
       light: {
-        primary: '#3f51b5',
+        primary: '#5c3cb8',
         secondary: '#696969',
         accent: '#8c9eff',
         error: '#b71c1c'

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LearningStyle;
 use App\Models\PossibleAnswer;
 use App\Models\Question;
 use App\Models\User;
@@ -11,13 +12,21 @@ use Illuminate\Support\Facades\Log;
 
 class SurveyController extends Controller
 {
-    public function index()
+    public function index($type)
     {
-        $user=User::find(62);
 
-        $user->calculateLearningStyle();
+        $type=strtolower($type);
 
-        return view("front.surveys.index");
+        if(!in_array($type,["student","tutor"])){
+            abort(404);
+        }
+
+        $type=ucfirst($type);
+
+
+
+
+        return view("front.surveys.index",compact("type"));
     }
 
     public function submitUserInfo(Request $request)
@@ -104,6 +113,7 @@ class SurveyController extends Controller
 
         $questions =$this->getQuestions($request->user_id,$type,$request->offset,$request->limit);
 
+
         return response([
             "message" => "Questions fetched successfully",
             "data" => [
@@ -148,7 +158,15 @@ class SurveyController extends Controller
 
         UserResponse::insert($responseData);
 
+        $userLearningStyle=null;
+
         $questions=$this->getQuestions($user_id,$request->type,$request->offset,$request->limit);
+
+        if($questions->count()==0){
+            $user=User::find($user_id);
+            $userLearningStyle=$user->userLearningStyle()["learning_style"];
+
+        }
 
         $progress=$this->calculateProgress($user_id,$request->type);
 
@@ -158,6 +176,7 @@ class SurveyController extends Controller
                 "user_id" => $user_id,
                 "questions" => $questions,
                 "progress" => $progress,
+                "userLearningStyle" => $userLearningStyle,
             ]
         ], 200);
     }
