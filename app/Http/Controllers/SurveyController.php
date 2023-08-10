@@ -165,6 +165,8 @@ class SurveyController extends Controller
         if($questions->count()==0){
             $user=User::find($user_id);
             $userLearningStyle=$user->userLearningStyle()["learning_style"];
+            $user->is_survey_completed=1;
+            $user->save();
 
         }
 

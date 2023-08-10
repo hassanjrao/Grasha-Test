@@ -15163,11 +15163,11 @@ small {
 
 #page-container.sidebar-dark #sidebar {
     color: #e9ecef;
-    background-color: #1f2937
+    background-color: #2c2071
 }
 
 #page-container.sidebar-dark #sidebar>.content-header {
-    background-color: #232e3e
+    background-color: #5c3cb8
 }
 
 #page-container.side-scroll #side-overlay,
@@ -17079,7 +17079,7 @@ button.bg-primary-dark-op:hover {
 }
 
 .bg-primary-darker {
-    background-color: #1f2937 !important
+    background-color: #2c2071 !important
 }
 
 a.bg-primary-darker:focus,
@@ -17406,7 +17406,7 @@ button.bg-sidebar-light:hover {
 }
 
 .bg-sidebar-dark {
-    background-color: #1f2937 !important
+    background-color: #2c2071 !important
 }
 
 a.bg-sidebar-dark:focus,
@@ -17461,7 +17461,7 @@ button.bg-default-dark-op:hover {
 }
 
 .bg-default-darker {
-    background-color: #1f2937 !important
+    background-color: #2c2071 !important
 }
 
 a.bg-default-darker:focus,
@@ -18067,11 +18067,11 @@ a.text-primary-dark:hover {
 }
 
 .text-primary-darker {
-    color: #1f2937 !important
+    color: #2c2071 !important
 }
 
 a.text-primary-darker.link-fx:before {
-    background-color: #1f2937 !important
+    background-color: #2c2071 !important
 }
 
 a.text-primary-darker:focus,
@@ -18500,11 +18500,11 @@ a.text-default-dark:hover {
 }
 
 .text-default-darker {
-    color: #1f2937 !important
+    color: #2c2071 !important
 }
 
 a.text-default-darker.link-fx:before {
-    background-color: #1f2937 !important
+    background-color: #2c2071 !important
 }
 
 a.text-default-darker:focus,
@@ -28871,7 +28871,7 @@ a.text-smooth-lighter:hover {
 .simplebar-scrollbar:before {
     left: 0;
     right: 0;
-    background: #1f2937
+    background: #2c2071
 }
 
 .sidebar-dark #sidebar .simplebar-scrollbar:before {
@@ -29718,7 +29718,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 .dark-mode .bg-body-extra-light {
-    background-color: #1f2937 !important
+    background-color: #2c2071 !important
 }
 
 .dark-mode a.bg-body-extra-light:focus,
@@ -30003,7 +30003,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 .dark-mode .nav-tabs .nav-link.active {
     color: #bec8d5;
     background-color: transparent;
-    border-color: #2a384b #2a384b #1f2937
+    border-color: #2a384b #2a384b #2c2071
 }
 
 .dark-mode .nav-tabs-block {
@@ -30025,7 +30025,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 .dark-mode .nav-tabs-block .nav-item.show .nav-link,
 .dark-mode .nav-tabs-block .nav-link.active {
     color: #bec8d5;
-    background-color: #1f2937;
+    background-color: #2c2071;
     border-color: transparent
 }
 
@@ -30749,11 +30749,11 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 .dark-mode .modal-content {
-    background: #1f2937
+    background: #2c2071
 }
 
 .dark-mode .toast {
-    background-color: #1f2937
+    background-color: #2c2071
 }
 
 .dark-mode .toast-header {
@@ -30798,7 +30798,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 .dark-mode .block {
-    background: #1f2937;
+    background: #2c2071;
     box-shadow: 0 1px 2px rgba(24, 31, 42, .5), 0 1px 2px rgba(24, 31, 42, .5)
 }
 
@@ -30826,7 +30826,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 .dark-mode .block.block-mode-fullscreen.block-transparent {
-    background-color: #1f2937
+    background-color: #2c2071
 }
 
 .dark-mode .block .block,
@@ -30892,7 +30892,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 .dark-mode .timeline-event-icon {
-    box-shadow: 0 .375rem 1.5rem #1f2937
+    box-shadow: 0 .375rem 1.5rem #2c2071
 }
 
 @media (min-width:1200px) {
@@ -30906,7 +30906,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 .dark-mode .swal2-popup {
-    background-color: #1f2937
+    background-color: #2c2071
 }
 
 .dark-mode .swal2-html-container {
@@ -30914,7 +30914,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 .dark-mode .jvectormap-container {
-    background-color: #1f2937 !important
+    background-color: #2c2071 !important
 }
 
 .dark-mode .ck.ck-editor {

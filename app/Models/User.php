@@ -47,10 +47,11 @@ class User extends Authenticatable
         return $this->hasMany(UserResponse::class, "user_id");
     }
 
-    public function learningStyles(){
-        $userRole=$this->roles()->first()->name;
+    public function learningStyles()
+    {
+        $userRole = $this->roles()->first()->name;
 
-        $learningStyles=LearningStyle::where("type",$userRole)->get();
+        $learningStyles = LearningStyle::where("type", $userRole)->get();
 
         return $learningStyles;
     }
@@ -84,38 +85,48 @@ class User extends Authenticatable
         })->count();
 
 
+        $responses = $this->responses()->whereHas("question")->with("question")->get();
 
 
+        $totalIndependentResponses = $responses->filter(function ($response) {
+            return $response->question->learning_style_id == 1;
+        })->sum("possible_answer_id");
 
-        $totalIndependentResponses = $this->responses()->whereHas("question", function ($query) {
-            $query->where("learning_style_id", 1);
+
+        // $totalIndependentResponses = $responses->whereHas("question", function ($query) {
+        //     $query->where("learning_style_id", 1);
+        // })
+        //     ->sum("possible_answer_id");
+
+        $totalEvitativoResponses = $responses->filter(function ($response) {
+            return $response->question->learning_style_id == 2;
         })
             ->sum("possible_answer_id");
 
-        $totalEvitativoResponses = $this->responses()->whereHas("question", function ($query) {
-            $query->where("learning_style_id", 2);
+        $totalCollaborativeResponses = $responses->filter(function ($response) {
+            return $response->question->learning_style_id == 3;
         })
             ->sum("possible_answer_id");
 
-        $totalCollaborativeResponses = $this->responses()->whereHas("question", function ($query) {
-            $query->where("learning_style_id", 3);
+        $totalDependienteResponses = $responses->filter(function ($response) {
+            return $response->question->learning_style_id == 4;
         })
             ->sum("possible_answer_id");
 
-        $totalDependienteResponses = $this->responses()->whereHas("question", function ($query) {
-            $query->where("learning_style_id", 4);
+        $totalCompetitiveResponses = $responses->filter(function ($response) {
+            return $response->question->learning_style_id == 5;
         })
             ->sum("possible_answer_id");
 
-        $totalCompetitiveResponses = $this->responses()->whereHas("question", function ($query) {
-            $query->where("learning_style_id", 5);
+        $totalParticipativeResponses = $responses->filter(function ($response) {
+            return $response->question->learning_style_id == 6;
         })
             ->sum("possible_answer_id");
 
-        $totalParticipativeResponses = $this->responses()->whereHas("question", function ($query) {
-            $query->where("learning_style_id", 6);
-        })
-            ->sum("possible_answer_id");
+        $totalScore = $totalIndependentResponses + $totalEvitativoResponses + $totalCollaborativeResponses + $totalDependienteResponses + $totalCompetitiveResponses + $totalParticipativeResponses;
+
+
+        $totalAverage = $totalScore / ($independentStyleQuestions + $evitativoStyleQuestions + $collaborativeStyleQuestions + $dependienteStyleQuestions + $competitiveStyleQuestions + $participativeStyleQuestions);
 
 
         $independentResponseseAverage = $totalIndependentResponses / $independentStyleQuestions;
@@ -175,9 +186,9 @@ class User extends Authenticatable
 
         $learningStyle = LearningStyle::find($learningStyleId);
 
-        if($learningStyle){
-            $learningStyle->info=$learningStyle->info;
-            $learningStyle->image=asset($learningStyle->image);
+        if ($learningStyle) {
+            $learningStyle->info = $learningStyle->info;
+            $learningStyle->image = asset($learningStyle->image);
         }
 
 
@@ -190,6 +201,10 @@ class User extends Authenticatable
         $competitiveResponseseSD = $highestAverage - $competitiveResponseseAverage;
         $participativeResponseseSD = $highestAverage - $participativeResponseseAverage;
 
+
+        $totalVariation = ($independentResponseseSD + $evitativoResponseseSD + $collaborativeResponseseSD + $dependienteResponseseSD + $competitiveResponseseSD + $participativeResponseseSD);
+
+
         $standardDaviations = [
             "independent" => $independentResponseseSD,
             "evitativo" => $evitativoResponseseSD,
@@ -200,11 +215,17 @@ class User extends Authenticatable
 
         ];
 
+        $totalSD = ($independentResponseseSD + $evitativoResponseseSD + $collaborativeResponseseSD + $dependienteResponseseSD + $competitiveResponseseSD + $participativeResponseseSD);
+
 
         return [
             "learning_style" => $learningStyle,
             "averages" => $averages,
+            "total_score" => $totalScore,
+            "total_average" => $totalAverage,
+            "total_variation" => $totalVariation,
             "standard_daviations" => $standardDaviations,
+            "total_sd" => $totalSD,
         ];
     }
 
@@ -235,32 +256,40 @@ class User extends Authenticatable
 
 
 
+        $responses = $this->responses()->whereHas("question")->with("question")->get();
 
 
-        $totalexpertResponses = $this->responses()->whereHas("question", function ($query) {
-            $query->where("learning_style_id", 7);
+
+
+        $totalexpertResponses = $responses->filter(function ($response) {
+            return $response->question->learning_style_id == 7;
         })
             ->sum("possible_answer_id");
 
-        $totalformalAuthorityResponses = $this->responses()->whereHas("question", function ($query) {
-            $query->where("learning_style_id", 8);
+        $totalformalAuthorityResponses = $responses->filter(function ($response) {
+            return $response->question->learning_style_id == 8;
         })
             ->sum("possible_answer_id");
 
-        $totalpersonalModelResponses = $this->responses()->whereHas("question", function ($query) {
-            $query->where("learning_style_id", 9);
+        $totalpersonalModelResponses = $responses->filter(function ($response) {
+            return $response->question->learning_style_id == 9;
         })
             ->sum("possible_answer_id");
 
-        $totalfacilitatorResponses = $this->responses()->whereHas("question", function ($query) {
-            $query->where("learning_style_id", 10);
+        $totalfacilitatorResponses = $responses->filter(function ($response) {
+            return $response->question->learning_style_id == 10;
         })
             ->sum("possible_answer_id");
 
-        $totaldelegadorResponses = $this->responses()->whereHas("question", function ($query) {
-            $query->where("learning_style_id", 11);
+        $totaldelegadorResponses = $responses->filter(function ($response) {
+            return $response->question->learning_style_id == 11;
         })
             ->sum("possible_answer_id");
+
+
+        $totalScore = $totalexpertResponses + $totalformalAuthorityResponses + $totalpersonalModelResponses + $totalfacilitatorResponses + $totaldelegadorResponses;
+
+        $totalAverage = $totalScore / ($expertStyleQuestions + $formalAuthorityStyleQuestions + $personalModelStyleQuestions + $facilitatorStyleQuestions + $delegadorStyleQuestions);
 
 
 
@@ -279,6 +308,7 @@ class User extends Authenticatable
             "delegador" => $delegadorResponseseAverage,
 
         ];
+
 
         // determine the learning style based on the learning style with the highest average
 
@@ -315,9 +345,9 @@ class User extends Authenticatable
 
         $learningStyle = LearningStyle::find($learningStyleId);
 
-        if($learningStyle){
-            $learningStyle->info=$learningStyle->info;
-            $learningStyle->image=asset($learningStyle->image);
+        if ($learningStyle) {
+            $learningStyle->info = $learningStyle->info;
+            $learningStyle->image = asset($learningStyle->image);
         }
 
 
@@ -329,6 +359,8 @@ class User extends Authenticatable
         $facilitatorResponseseSD = $highestAverage - $facilitatorResponseseAverage;
         $delegadorResponseseSD = $highestAverage - $delegadorResponseseAverage;
 
+        $totalVariation = ($expertResponseseSD + $formalAuthorityResponseseSD + $personalModelResponseseSD + $facilitatorResponseseSD + $delegadorResponseseSD);
+
         $standardDaviations = [
             "expert" => $expertResponseseSD,
             "formalAuthority" => $formalAuthorityResponseseSD,
@@ -338,24 +370,29 @@ class User extends Authenticatable
 
         ];
 
+        $totalSD = ($expertResponseseSD + $formalAuthorityResponseseSD + $personalModelResponseseSD + $facilitatorResponseseSD + $delegadorResponseseSD);
+
 
         return [
             "learning_style" => $learningStyle,
+            "total_score" => $totalScore,
+            "total_average" => $totalAverage,
+            "total_variation" => $totalVariation,
             "averages" => $averages,
             "standard_daviations" => $standardDaviations,
+            "total_sd" => $totalSD,
         ];
     }
 
 
-    public function userLearningStyle(){
-        $userRole=$this->roles()->first()->name;
+    public function userLearningStyle()
+    {
+        $userRole = $this->roles()->first()->name;
 
-        if($userRole=="student"){
+        if ($userRole == "student") {
             return $this->calculateLearningStyleStudent();
-        }else{
+        } else {
             return $this->calculateLearningStyleTutor();
         }
     }
-
-
 }

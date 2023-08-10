@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\AdminStudentController;
+use App\Http\Controllers\AdminTutorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Auth;
@@ -38,3 +42,16 @@ Route::prefix("survey")->name("survey.")->group(function () {
     Route::post("submit-answers", [SurveyController::class, "submitAnswers"])->name("submit-answers");
 });
 
+
+
+Route::middleware(["auth","set_default_lang"])->group(function () {
+
+    Route::prefix("admin")->name("admin.")->group(function(){
+        Route::get("",[AdminDashboardController::class,"index"])->name("dashboard.index");
+
+        Route::resource("profile",AdminProfileController::class)->only(["index","update"]);
+
+        Route::resource("tutors",AdminTutorController::class)->except(["show"]);
+        Route::resource("students",AdminStudentController::class)->except(["show"]);
+    });
+});
