@@ -44,7 +44,7 @@ Route::prefix("survey")->name("survey.")->group(function () {
 
 
 
-Route::middleware(["auth","set_default_lang"])->group(function () {
+Route::middleware(["auth"])->group(function () {
 
     Route::prefix("admin")->name("admin.")->group(function(){
         Route::get("",[AdminDashboardController::class,"index"])->name("dashboard.index");

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title>Admin Panel - {{ config('app.name') }}</title>
+    <title>{{ __("admin.admin_panel") }} - {{ config('app.name') }}</title>
 
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
@@ -135,7 +135,7 @@
                     <span class="smini-visible">
                         <i class="fa fa-circle-notch text-primary"></i>
                     </span>
-                    <span class="smini-hide fs-5 tracking-wider">Admin Panel</span></span>
+                    <span class="smini-hide fs-5 tracking-wider">{{ __('admin.admin_panel') }}</span></span>
                 </a>
                 <!-- END Logo -->
 
@@ -169,7 +169,7 @@
                             <a class="nav-main-link{{ request()->is('admin') ? ' active' : '' }}"
                                 href="{{ route('admin.dashboard.index') }}">
                                 <i class="nav-main-link-icon si si-cursor"></i>
-                                <span class="nav-main-link-name">Dashboard</span>
+                                <span class="nav-main-link-name">{{ __("admin.dashboard") }}</span>
                             </a>
                         </li>
 
@@ -178,7 +178,7 @@
                                 href="{{ route('admin.tutors.index') }}">
                                 <i class="nav-main-link-icon fas fa-user-tie"></i>
 
-                                <span class="nav-main-link-name">Tutors</span>
+                                <span class="nav-main-link-name">{{ __("admin.tutors") }}</span>
                             </a>
                         </li>
 
@@ -187,7 +187,7 @@
                                 href="{{ route('admin.students.index') }}">
 
                                 <i class="nav-main-link-icon fas fa-user-graduate"></i>
-                                 <span class="nav-main-link-name">Students</span>
+                                 <span class="nav-main-link-name">{{ __("admin.students") }}</span>
                             </a>
                         </li>
 
@@ -249,7 +249,7 @@
                             <div class="p-2">
                                 <a class="dropdown-item d-flex align-items-center justify-content-between"
                                     href="{{ route('admin.profile.index') }}">
-                                    <span class="fs-sm fw-medium">Profile</span>
+                                    <span class="fs-sm fw-medium">{{ __("admin.profile") }}</span>
 
                                 </a>
                                 <form action="{{ route('logout') }}" id="logout-form" method="POST">
@@ -260,7 +260,7 @@
 
                                 <a class="dropdown-item d-flex align-items-center justify-content-between"
                                     onclick="document.getElementById('logout-form').submit()">
-                                    <span class="fs-sm fw-medium">Log Out</span>
+                                    <span class="fs-sm fw-medium">{{ __("admin.logout") }}</span>
                                 </a>
 
                             </div>
@@ -307,7 +307,7 @@
 
                     <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-start">
                         <a class="fw-semibold" href="https://1.envato.market/AVD6j"
-                            target="_blank">{{ config('app.name') }}</a> &copy; <span data-toggle="year-copy"></span>
+                            target="_blank">{{ __("admin.powered_by") }}</a>
                     </div>
                 </div>
             </div>

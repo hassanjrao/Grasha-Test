@@ -10,7 +10,7 @@
                     <!-- Sign In Block -->
                     <div class="block block-rounded mb-0">
                         <div class="block-header block-header-default">
-                            <h3 class="block-title">Sign In</h3>
+                            <h3 class="block-title">{{ __("admin.sign_in") }}</h3>
                             <div class="block-options">
 
 
@@ -25,7 +25,7 @@
                             <div class="p-sm-3 px-lg-4 px-xxl-5 py-lg-5">
                                 {{-- <h1 class="h2 mb-4"><img src="{{asset("logo/main_logo.png")}}" height="200px" class="img-fluid" alt=""></h1> --}}
                                 <p class="fw-medium text-muted">
-                                    Welcome, please login.
+                                    {{ __("admin.welcome") }}
                                 </p>
 
                                 <!-- Sign In Form -->
@@ -49,7 +49,7 @@
                                             <input type="password"
                                                 class="form-control form-control-alt form-control-lg @error('password') is-invalid @enderror"
                                                 id="login-password" name="password" required autocomplete="current-password"
-                                                placeholder="Password">
+                                                placeholder="{{ __("admin.password") }}">
 
 
                                             @error('password')
@@ -64,16 +64,16 @@
                                                 <input class="form-check-input" type="checkbox" name="remember"
                                                     id="login-remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                                <label class="form-check-label" for="login-remember">Remember Me</label>
+                                                <label class="form-check-label" for="login-remember">{{ __("admin.remember_me") }}</label>
                                             </div>
                                         </div>
 
 
                                     </div>
                                     <div class="row mb-4">
-                                        <div class="col-md-6 col-xl-5">
+                                        <div class="col-md-12 col-xl-5">
                                             <button type="submit" class="btn w-100 btn-alt-primary">
-                                                <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> Sign In
+                                                <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> {{ __("admin.sign_in") }}
                                             </button>
                                         </div>
 
@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="fs-sm text-muted text-center">
-                <strong>{{ config("app.name") }}, All Rights Reserved </strong> &copy; <span
+                <strong>{{ config("app.name") }}, {{ __("admin.all_rights_reserved") }}</strong> &copy; <span
                     data-toggle="year-copy"></span>
             </div>
             <br>

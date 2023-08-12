@@ -15,7 +15,7 @@
         <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <h3 class="block-title">
-                    Students
+                    {{ __("admin.students") }}
                 </h3>
 
 
@@ -31,17 +31,17 @@
                     <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Learning Style</th>
-                                <th>Learning Style Score</th>
-                                <th>Learning Style Average</th>
-                                <th>Learning Style Variance</th>
-                                <th>Learning Style Standard Daviation</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
-                                <th>Action</th>
+                                <th>{{ __("admin.index") }}</th>
+                                <th>{{ __("admin.name") }}</th>
+                                <th>{{ __("admin.email") }}</th>
+                                <th>{{ __("admin.age") }}</th>
+                                <th>{{ __("admin.sex") }}</th>
+                                <th>{{ __("admin.teaching_style") }}</th>
+                                @foreach ($questions as $ind => $question)
+                                    <th>{{ __("admin.question") }} {{ ++$ind }}</th>
+                                @endforeach
+
+                                <th>{{ __("admin.created_at") }}</th>
 
                             </tr>
 
@@ -49,10 +49,9 @@
 
                         <tbody>
                             @foreach ($students as $ind => $student)
-
-                            @php
-                                $learningStyle = $student->userLearningStyle();
-                            @endphp
+                                @php
+                                    $learningStyle = $student->userLearningStyle();
+                                @endphp
 
 
                                 <tr>
@@ -62,31 +61,20 @@
                                     <td>{{ $student->name }}</td>
                                     <td>{{ $student->email }}</td>
 
-                                    <td>{{ $learningStyle['learning_style'] ? $learningStyle['learning_style']->style_en:'' }}</td>
 
-                                    <td>{{ $learningStyle['total_score'] }}</td>
-                                    <td>{{ $learningStyle['total_average'] }}</td>
-                                    <td>{{ $learningStyle['total_variation'] }}</td>
-                                    <td>{{ $learningStyle['total_sd'] }}</td>
+                                    <td>{{ $student->age }}</td>
+
+                                    <td>{{ $student->sex }}</td>
+
+                                    <td>{{ $learningStyle['learning_style'] ? $learningStyle['learning_style']->style : '' }}
+                                    </td>
+
+                                    @foreach ($student->responses as $response)
+                                    <td>{{ $response->possible_answer_id }}</td>
+
+                                    @endforeach
 
                                     <td>{{ $student->created_at }}</td>
-                                    <td>{{ $student->updated_at }}</td>
-
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Horizontal Primary">
-
-                                            <a href="{{ route('admin.students.edit', $student->id) }}"
-                                                class="btn btn-sm btn-alt-primary">Edit</a>
-                                            <form id="form-{{ $student->id }}"
-                                                action="{{ route('admin.students.destroy', $student->id) }}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <input type="button" onclick="confirmDelete({{ $student->id }})"
-                                                    class="btn btn-sm btn-alt-danger" value="Delete">
-
-                                            </form>
-                                        </div>
-                                    </td>
 
                                 </tr>
                             @endforeach

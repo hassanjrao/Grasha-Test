@@ -32,4 +32,12 @@ class Question extends Model
     public function getQuestionAttribute(){
         return $this->{"question_".app()->getLocale()};
     }
+
+    public function tutorQuestions(){
+        return $this->where("type","tutor")->get();
+    }
+
+    public function studentQuestions(){
+        return $this->where("type","student")->get();
+    }
 }

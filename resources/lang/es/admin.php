@@ -1,0 +1,35 @@
+<?php
+
+return [
+    "sign_in"=>"Iniciar sesión",
+    "welcome"=>"¡Bienvenido, por favor inicia sesión!",
+    "email"=>"Email",
+    "password"=>"Contraseña",
+    "remember_me"=>"Recuérdame",
+    "admin_panel"=>"Panel de administración",
+    "tutors"=>"Tutores",
+    "students"=>"Estudiantes",
+    "view_tutors"=>"Ver tutores",
+    "view_students"=>"Ver estudiantes",
+    "index"=>"índice",
+    "name"=>"Nombre",
+    "age"=>"Edad",
+    "sex"=>"Sexo",
+    "teaching_style"=>"Estilo de enseñanza",
+    "learning_style"=>"Estilo de aprendizaje",
+    "question"=>"Pregunta",
+    "search"=>"Buscar",
+    "page_1_of_1"=>"Página 1 de 1",
+    "all_rights_reserved"=>"Todos los derechos reservados",
+    "dashboard"=>"Tablero",
+    "profile"=>"Perfil",
+    "logout"=>"Cerrar sesión",
+    "created_at"=>"Creado en",
+    "old_password"=>"Contraseña anterior",
+    "update"=>"Actualizar",
+    "updated_successfully"=>"Actualizado con éxito",
+    "old_password_incorrect"=>"La contraseña anterior es incorrecta",
+    "powered_by"=>"Desarrollado por",
+];
+
+?>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,15 @@ class AdminTutorController extends Controller
      */
     public function index()
     {
-        $tutors=User::role('tutor')->latest()->get();
+        $tutors=User::role('tutor')
+        ->where("is_survey_completed",1)
+        ->latest()->get();
 
-        return view("admin.tutors.index",compact("tutors"));
+        $quesObj=new Question();
+
+        $questions=$quesObj->tutorQuestions();
+
+        return view("admin.tutors.index",compact("tutors","questions"));
     }
 
     /**

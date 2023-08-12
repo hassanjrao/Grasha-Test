@@ -3,15 +3,18 @@
     <v-container>
       <v-card>
         <v-card-title class="text-center">
-          <h2 class="pt-2">Questionaire</h2>
+          <h2 class="pt-2">Cuestionario de Estilos de Enseñanza | Test de Grasha</h2>
         </v-card-title>
         <v-card-text>
           <v-row>
-            <v-col cols="12" sm="6" md="4">
+            <v-col cols="12" sm="6" md="2">
               <v-select
                 v-model="userInfo.type"
-                :items="['Student', 'Tutor']"
-                label="Student/Tutor"
+                :items="[
+                {text:'Estudiante',value:'Student'},
+                {text:'Tutor',value:'Tutor'},
+                ]"
+                label="Estudiante/Tutor"
                 required
                 disabled
                 @input="$v.userInfo.type.$touch()"
@@ -19,10 +22,10 @@
                 @blur="$v.userInfo.type.$touch()"
               ></v-select>
             </v-col>
-            <v-col cols="12" sm="6" md="4">
+            <v-col cols="12" sm="6" md="2">
               <v-text-field
                 v-model="userInfo.name"
-                label="Name"
+                label="Nombre"
                 required
                 :disabled="useInfoDisabled"
                 @input="$v.userInfo.name.$touch()"
@@ -30,6 +33,36 @@
                 @blur="$v.userInfo.name.$touch()"
               ></v-text-field>
             </v-col>
+            <v-col cols="12" sm="6" md="2">
+              <v-text-field
+                v-model="userInfo.age"
+                type="number"
+                min="1"
+                label="Edad"
+                required
+                :disabled="useInfoDisabled"
+                @input="$v.userInfo.age.$touch()"
+                :error-messages="userAgeErrors"
+                @blur="$v.userInfo.age.$touch()"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="2">
+              <!-- sex -->
+              <v-select
+                v-model="userInfo.sex"
+                :items="[
+                {text:'Masculino',value:'Masculino'},
+                {text:'Femenino',value:'Femenino'}
+                ]"
+                label="Sexo"
+                required
+                @input="$v.userInfo.sex.$touch()"
+                :error-messages="userSexErrors"
+                @blur="$v.userInfo.sex.$touch()"
+              ></v-select>
+
+            </v-col>
+
             <v-col cols="12" sm="6" md="4">
               <v-text-field
                 v-model="userInfo.email"
@@ -52,7 +85,9 @@
                 v-if="!useInfoDisabled"
                 :loading="submitUserInfoLoading"
                 @click="submitUserInfo"
-                >Submit & Start</v-btn
+                >
+                Enviar y Empezar
+                </v-btn
               >
             </v-col>
           </v-row>
@@ -93,6 +128,14 @@ export default {
         required,
         email,
       },
+
+      age: {
+        required,
+      },
+      sex: {
+        required,
+      }
+
     },
   },
 
@@ -106,16 +149,29 @@ export default {
     userNameErrors() {
       const errors = [];
       if (!this.$v.userInfo.name.$dirty) return errors;
-      !this.$v.userInfo.name.required && errors.push("Name is required.");
+      !this.$v.userInfo.name.required && errors.push("Se requiere el nombre.");
       return errors;
     },
     userEmailErrors() {
       const errors = [];
       if (!this.$v.userInfo.email.$dirty) return errors;
-      !this.$v.userInfo.email.required && errors.push("Email is required.");
-      !this.$v.userInfo.email.email && errors.push("Must be valid e-mail");
+      !this.$v.userInfo.email.required && errors.push("Correo electronico es requerido.");
+      !this.$v.userInfo.email.email && errors.push("Debe ser válido el correo electrónico");
       return errors;
     },
+    userAgeErrors() {
+      const errors = [];
+      if (!this.$v.userInfo.age.$dirty) return errors;
+      !this.$v.userInfo.age.required && errors.push("Se requiere edad.");
+      return errors;
+    },
+    userSexErrors(){
+      const errors = [];
+      if (!this.$v.userInfo.age.$dirty) return errors;
+      !this.$v.userInfo.age.required && errors.push("Se requiere sexo.");
+      return errors;
+    }
+
   },
 
   created() {
@@ -131,6 +187,8 @@ export default {
         type: "",
         name: "",
         email: "",
+        age: "",
+        sex: ""
       },
       useInfoDisabled: false,
       submitUserInfoLoading: false,
@@ -153,6 +211,8 @@ export default {
             name: this.userInfo.name.toLowerCase(),
             email: this.userInfo.email.toLowerCase(),
             type: this.userInfo.type.toLowerCase(),
+            age:this.userInfo.age,
+            sex: this.userInfo.sex.toLowerCase(),
         })
         .then((response) => {
 

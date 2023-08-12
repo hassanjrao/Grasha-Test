@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'age',
+        'sex'
     ];
 
     /**
@@ -189,6 +191,7 @@ class User extends Authenticatable
         if ($learningStyle) {
             $learningStyle->info = $learningStyle->info;
             $learningStyle->image = asset($learningStyle->image);
+            $learningStyle->style= $learningStyle->style;
         }
 
 
@@ -348,6 +351,7 @@ class User extends Authenticatable
         if ($learningStyle) {
             $learningStyle->info = $learningStyle->info;
             $learningStyle->image = asset($learningStyle->image);
+            $learningStyle->style= $learningStyle->style;
         }
 
 

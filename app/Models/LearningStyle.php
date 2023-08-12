@@ -11,11 +11,16 @@ class LearningStyle extends Model
 
     protected $guarded=[];
 
-    protected $append=["info"];
+    protected $append=["info","style"];
 
     public function getInfoAttribute()
     {
         return $this->{"info_".app()->getLocale()};
+    }
+
+    public function getStyleAttribute()
+    {
+        return $this->{"style_".app()->getLocale()};
     }
 
     public function questions()

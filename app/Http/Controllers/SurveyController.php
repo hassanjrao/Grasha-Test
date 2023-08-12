@@ -35,6 +35,8 @@ class SurveyController extends Controller
             "type" => "required|in:student,tutor",
             "name" => "required",
             "email" => "required|email|unique:users,email",
+            "age"=>"required",
+            "sex"=>"required",
         ]);
 
         $user = User::updateOrCreate([
@@ -43,6 +45,8 @@ class SurveyController extends Controller
             "name" => $request->name,
             "email" => $request->email,
             "password" => bcrypt("test1234"),
+            "age"=>$request->age,
+            "sex"=>$request->sex,
         ]);
 
         $user->assignRole($request->type);

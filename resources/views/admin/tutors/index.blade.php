@@ -15,7 +15,7 @@
         <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <h3 class="block-title">
-                    Tutors
+                    {{ __("admin.tutors") }}
                 </h3>
 
 
@@ -31,17 +31,19 @@
                     <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                               <th>Teaching Style</th>
-                                <th>Teaching Style Score</th>
-                                <th>Teaching Style Average</th>
-                                <th>Teaching Style Variance</th>
-                                <th>Teaching Style Standard Daviation</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
-                                <th>Action</th>
+                                <th>{{ __("admin.index") }}</th>
+                                <th>{{ __("admin.name") }}</th>
+                                <th>{{ __("admin.email") }}</th>
+                                <th>{{ __("admin.age") }}</th>
+                                <th>{{ __("admin.sex") }}</th>
+                               <th>{{ __("admin.teaching_style") }}</th>
+
+                               @foreach ($questions as $ind=> $question)
+                                 <th>{{ __("admin.question") }} {{ ++$ind }}</th>
+                               @endforeach
+
+                                <th>{{ __("admin.created_at") }}</th>
+
 
                             </tr>
 
@@ -49,6 +51,7 @@
 
                         <tbody>
                             @foreach ($tutors as $ind => $tutor)
+
 
                             @php
                                 $learningStyle = $tutor->userLearningStyle();
@@ -62,31 +65,18 @@
                                     <td>{{ $tutor->name }}</td>
                                     <td>{{ $tutor->email }}</td>
 
-                                    <td>{{ $learningStyle['learning_style'] ? $learningStyle['learning_style']->style_en:'' }}</td>
+                                    <td>{{ $tutor->age }}</td>
 
-                                    <td>{{ $learningStyle['total_score'] }}</td>
-                                    <td>{{ $learningStyle['total_average'] }}</td>
-                                    <td>{{ $learningStyle['total_variation'] }}</td>
-                                    <td>{{ $learningStyle['total_sd'] }}</td>
+                                    <td>{{ $tutor->sex }}</td>
+
+                                    <td>{{ $learningStyle['learning_style'] ? $learningStyle['learning_style']->style:'' }}</td>
+
+                                    @foreach ($tutor->responses as $response)
+                                    <td>{{ $response->possible_answer_id }}</td>
+
+                                    @endforeach
 
                                     <td>{{ $tutor->created_at }}</td>
-                                    <td>{{ $tutor->updated_at }}</td>
-
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Horizontal Primary">
-
-                                            <a href="{{ route('admin.tutors.edit', $tutor->id) }}"
-                                                class="btn btn-sm btn-alt-primary">Edit</a>
-                                            <form id="form-{{ $tutor->id }}"
-                                                action="{{ route('admin.tutors.destroy', $tutor->id) }}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <input type="button" onclick="confirmDelete({{ $tutor->id }})"
-                                                    class="btn btn-sm btn-alt-danger" value="Delete">
-
-                                            </form>
-                                        </div>
-                                    </td>
 
                                 </tr>
                             @endforeach

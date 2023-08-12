@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,12 @@ class AdminStudentController extends Controller
         // ->where("id",62)
         ->latest()->get();
 
-        return view("admin.students.index",compact("students"));
+
+        $quesObj=new Question();
+
+        $questions=$quesObj->tutorQuestions();
+
+        return view("admin.students.index",compact("students","questions"));
     }
 
     /**

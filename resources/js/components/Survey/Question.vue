@@ -4,7 +4,13 @@
       <v-card-text>
         <v-row>
           <v-col cols="12" sm="12" md="12">
-            <v-progress-linear disabled striped :value="progress" color="primary" height="25">
+            <v-progress-linear
+              disabled
+              striped
+              :value="progress"
+              color="primary"
+              height="25"
+            >
               <template v-slot:default="{ value }">
                 <strong>{{ Math.ceil(value) }}%</strong>
               </template>
@@ -50,31 +56,35 @@
 
           <v-col cols="12" sm="6" md="4" class="text-end">
             <v-btn color="primary" :loading="loading" @click="submitAnswers"
-              >Submit & Next</v-btn
+              >Siguiente</v-btn
             >
           </v-col>
         </v-row>
 
-
         <v-row v-if="userLearningStyle">
+          <v-col cols="12" sm="12" md="12">
+            <v-card>
+              <v-card-title>
+                <div v-if="user.type == 'student'">Tu Estilo de Aprendizaje:</div>
 
-            <v-col cols="12" sm="12" md="12">
-                <v-card>
-                <v-card-title>
-                    Your Learning Style
-                </v-card-title>
-                <v-card-text>
+                <div v-if="user.type == 'tutor'">Tu Estilo de Enseñanza:</div>
+              </v-card-title>
+              <v-card-text>
+                <v-row>
+                  <v-col cols="12" sm="12" md="8">
                     <p>
-                    <strong>{{ userLearningStyle.info }}</strong>
+                      <strong>{{ userLearningStyle.info }}</strong>
                     </p>
-                    <!-- image -->
+                  </v-col>
+                  <v-col cols="12" sm="12" md="4">
+
                     <v-img :src="userLearningStyle.image" ></v-img>
-                </v-card-text>
-                </v-card>
-            </v-col>
-
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
+          </v-col>
         </v-row>
-
       </v-card-text>
     </v-card>
   </v-app>
@@ -127,7 +137,6 @@ export default {
         })
         .then((response) => {
           this.questions = response.data.data.questions;
-
 
           console.log("Questions", this.questions);
         })

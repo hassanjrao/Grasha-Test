@@ -85,7 +85,7 @@ class AdminProfileController extends Controller
             ]);
 
             if(!\Hash::check($request->old_password,$user->password)){
-                return redirect()->back()->with("errors","Old password is incorrect");
+                return redirect()->back()->with("errors","La contraseña anterior es incorrecta");
             }
 
             $user->update([
@@ -99,7 +99,7 @@ class AdminProfileController extends Controller
         ]);
 
 
-        return redirect()->route("admin.profile.index")->with("success","Updated successfully");
+        return redirect()->route("admin.profile.index")->with("success","Actualizado con éxito");
 
     }
 

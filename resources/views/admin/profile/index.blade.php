@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('page-title', 'Profie')
+@section('page-title', '{{ __("admin.profile") }}')
 @section('content')
 
     <!-- Page Content -->
@@ -25,12 +25,12 @@
 
                             <div class="row mb-4">
                                 <div class="col-6">
-                                    <label class="form-label" for="label">Name</label>
+                                    <label class="form-label" for="label">{{ __("admin.name") }}</label>
                                     <input required type="text" value="{{ $user->name }}" class="form-control"
                                         id="name" name="name">
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label" for="label">email</label>
+                                    <label class="form-label" for="label">{{ __("admin.email") }}</label>
                                     <input required type="text" value="{{ $user->email }}" class="form-control"
                                         id="email" name="email">
                                 </div>
@@ -40,13 +40,13 @@
 
                             <div class="row mb-4">
                                 <div class="col-6">
-                                    <label class="form-label" for="label">Old Password</label>
+                                    <label class="form-label" for="label">{{ __("admin.old_password") }}</label>
                                     <input type="password"  class="form-control"
                                         id="old_password" name="old_password">
 
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label" for="label">Password</label>
+                                    <label class="form-label" for="label">{{ __("admin.password") }}</label>
                                     <input type="password"  class="form-control"
                                         id="password" name="password">
                                 </div>
@@ -64,7 +64,7 @@
 
                     <div class="d-flex justify-content-end mb-4">
 
-                        <button type="submit" class="btn btn-primary  border">Update</button>
+                        <button type="submit" class="btn btn-primary  border">{{ __("admin.update") }}</button>
 
                     </div>
 

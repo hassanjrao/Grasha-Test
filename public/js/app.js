@@ -5236,6 +5236,12 @@ __webpack_require__.r(__webpack_exports__);
       email: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.required,
         email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.email
+      },
+      age: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.required
+      },
+      sex: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.required
       }
     }
   },
@@ -5249,14 +5255,26 @@ __webpack_require__.r(__webpack_exports__);
     userNameErrors: function userNameErrors() {
       var errors = [];
       if (!this.$v.userInfo.name.$dirty) return errors;
-      !this.$v.userInfo.name.required && errors.push("Name is required.");
+      !this.$v.userInfo.name.required && errors.push("Se requiere el nombre.");
       return errors;
     },
     userEmailErrors: function userEmailErrors() {
       var errors = [];
       if (!this.$v.userInfo.email.$dirty) return errors;
-      !this.$v.userInfo.email.required && errors.push("Email is required.");
-      !this.$v.userInfo.email.email && errors.push("Must be valid e-mail");
+      !this.$v.userInfo.email.required && errors.push("Correo electronico es requerido.");
+      !this.$v.userInfo.email.email && errors.push("Debe ser válido el correo electrónico");
+      return errors;
+    },
+    userAgeErrors: function userAgeErrors() {
+      var errors = [];
+      if (!this.$v.userInfo.age.$dirty) return errors;
+      !this.$v.userInfo.age.required && errors.push("Se requiere edad.");
+      return errors;
+    },
+    userSexErrors: function userSexErrors() {
+      var errors = [];
+      if (!this.$v.userInfo.age.$dirty) return errors;
+      !this.$v.userInfo.age.required && errors.push("Se requiere sexo.");
       return errors;
     }
   },
@@ -5271,7 +5289,9 @@ __webpack_require__.r(__webpack_exports__);
       userInfo: {
         type: "",
         name: "",
-        email: ""
+        email: "",
+        age: "",
+        sex: ""
       },
       useInfoDisabled: false,
       submitUserInfoLoading: false,
@@ -5293,7 +5313,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(this.baseURL + "/submit-user-info", {
         name: this.userInfo.name.toLowerCase(),
         email: this.userInfo.email.toLowerCase(),
-        type: this.userInfo.type.toLowerCase()
+        type: this.userInfo.type.toLowerCase(),
+        age: this.userInfo.age,
+        sex: this.userInfo.sex.toLowerCase()
       }).then(function (response) {
         console.log(response);
         _this.submitUserInfoLoading = false;
@@ -5412,17 +5434,29 @@ var render = function render() {
     on: {
       click: _vm.submitAnswers
     }
-  }, [_vm._v("Submit & Next")])], 1)], 1) : _vm._e(), _vm._v(" "), _vm.userLearningStyle ? _c("v-row", [_c("v-col", {
+  }, [_vm._v("Siguiente")])], 1)], 1) : _vm._e(), _vm._v(" "), _vm.userLearningStyle ? _c("v-row", [_c("v-col", {
     attrs: {
       cols: "12",
       sm: "12",
       md: "12"
     }
-  }, [_c("v-card", [_c("v-card-title", [_vm._v("\n                  Your Learning Style\n              ")]), _vm._v(" "), _c("v-card-text", [_c("p", [_c("strong", [_vm._v(_vm._s(_vm.userLearningStyle.info))])]), _vm._v(" "), _c("v-img", {
+  }, [_c("v-card", [_c("v-card-title", [_vm.user.type == "student" ? _c("div", [_vm._v("Tu Estilo de Aprendizaje:")]) : _vm._e(), _vm._v(" "), _vm.user.type == "tutor" ? _c("div", [_vm._v("Tu Estilo de Enseñanza:")]) : _vm._e()]), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "12",
+      md: "8"
+    }
+  }, [_c("p", [_c("strong", [_vm._v(_vm._s(_vm.userLearningStyle.info))])])]), _vm._v(" "), _c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "12",
+      md: "4"
+    }
+  }, [_c("v-img", {
     attrs: {
       src: _vm.userLearningStyle.image
     }
-  })], 1)], 1)], 1)], 1) : _vm._e()], 1)], 1)], 1);
+  })], 1)], 1)], 1)], 1)], 1)], 1) : _vm._e()], 1)], 1)], 1);
 };
 
 var staticRenderFns = [];
@@ -5455,16 +5489,22 @@ var render = function render() {
     staticClass: "text-center"
   }, [_c("h2", {
     staticClass: "pt-2"
-  }, [_vm._v("Questionaire")])]), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-col", {
+  }, [_vm._v("Cuestionario de Estilos de Enseñanza | Test de Grasha")])]), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-col", {
     attrs: {
       cols: "12",
       sm: "6",
-      md: "4"
+      md: "2"
     }
   }, [_c("v-select", {
     attrs: {
-      items: ["Student", "Tutor"],
-      label: "Student/Tutor",
+      items: [{
+        text: "Estudiante",
+        value: "Student"
+      }, {
+        text: "Tutor",
+        value: "Tutor"
+      }],
+      label: "Estudiante/Tutor",
       required: "",
       disabled: "",
       "error-messages": _vm.userTypeErrors
@@ -5488,11 +5528,11 @@ var render = function render() {
     attrs: {
       cols: "12",
       sm: "6",
-      md: "4"
+      md: "2"
     }
   }, [_c("v-text-field", {
     attrs: {
-      label: "Name",
+      label: "Nombre",
       required: "",
       disabled: _vm.useInfoDisabled,
       "error-messages": _vm.userNameErrors
@@ -5511,6 +5551,70 @@ var render = function render() {
         _vm.$set(_vm.userInfo, "name", $$v);
       },
       expression: "userInfo.name"
+    }
+  })], 1), _vm._v(" "), _c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "6",
+      md: "2"
+    }
+  }, [_c("v-text-field", {
+    attrs: {
+      type: "number",
+      min: "1",
+      label: "Edad",
+      required: "",
+      disabled: _vm.useInfoDisabled,
+      "error-messages": _vm.userAgeErrors
+    },
+    on: {
+      input: function input($event) {
+        return _vm.$v.userInfo.age.$touch();
+      },
+      blur: function blur($event) {
+        return _vm.$v.userInfo.age.$touch();
+      }
+    },
+    model: {
+      value: _vm.userInfo.age,
+      callback: function callback($$v) {
+        _vm.$set(_vm.userInfo, "age", $$v);
+      },
+      expression: "userInfo.age"
+    }
+  })], 1), _vm._v(" "), _c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "6",
+      md: "2"
+    }
+  }, [_c("v-select", {
+    attrs: {
+      items: [{
+        text: "Masculino",
+        value: "Masculino"
+      }, {
+        text: "Femenino",
+        value: "Femenino"
+      }],
+      label: "Sexo",
+      required: "",
+      "error-messages": _vm.userSexErrors
+    },
+    on: {
+      input: function input($event) {
+        return _vm.$v.userInfo.sex.$touch();
+      },
+      blur: function blur($event) {
+        return _vm.$v.userInfo.sex.$touch();
+      }
+    },
+    model: {
+      value: _vm.userInfo.sex,
+      callback: function callback($$v) {
+        _vm.$set(_vm.userInfo, "sex", $$v);
+      },
+      expression: "userInfo.sex"
     }
   })], 1), _vm._v(" "), _c("v-col", {
     attrs: {
@@ -5557,7 +5661,7 @@ var render = function render() {
     on: {
       click: _vm.submitUserInfo
     }
-  }, [_vm._v("Submit & Start")]) : _vm._e()], 1)], 1)], 1)], 1), _vm._v(" "), _c("v-divider"), _vm._v(" "), _vm.user ? _c("Question", {
+  }, [_vm._v("\n              Enviar y Empezar\n              ")]) : _vm._e()], 1)], 1)], 1)], 1), _vm._v(" "), _c("v-divider"), _vm._v(" "), _vm.user ? _c("Question", {
     attrs: {
       user: _vm.user
     }
