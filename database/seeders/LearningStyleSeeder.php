@@ -81,7 +81,7 @@ class LearningStyleSeeder extends Seeder
             [
                 "style_es"=>"Experto",
                 "style_en"=>"Expert",
-                "type"=>"tutors",
+                "type"=>"tutor",
                 "info_es"=>"Eres tutor que posee el conocimiento y la experiencia que los estudiantes requieren. Mantienes tu estatus entre tus estudiantes porque dominas los detalles de la disciplina que impartes. Además, retas a tus estudiantes mediante la competencia entre ellos y partes del supuesto de que tus pupilos necesitan ser preparados por alguien como tú.",
                 "info_en"=>"You are a tutor who possesses the knowledge and experience that students require. You maintain your status among your students because you master the details of the discipline you teach. In addition, you challenge your students through competition between them and you assume that your pupils need to be prepared by someone like you.",
                 "created_at"=>now(),
@@ -91,7 +91,7 @@ class LearningStyleSeeder extends Seeder
             [
                 "style_es"=>"Autoridad Formal",
                 "style_en"=>"Formal Authority",
-                "type"=>"tutors",
+                "type"=>"tutor",
                 "info_es"=>"Te refieres al tutor que mantiene su estatus entre los estudiantes por su conocimiento y, desde luego, dentro de la escuela. Ofreces retroalimentación eficaz a los estudiantes basada en los objetivos del curso, tus expectativas y mediante los reglamentos institucionales. Cuidas mucho la normatividad correcta y aceptable dentro de la escuela y ofreces un conocimiento estructurado a tus pupilos.",
                 "info_en"=>"You refer to the tutor who maintains his status among the students for his knowledge and, of course, within the school. You offer effective feedback to students based on course objectives, your expectations and through institutional regulations. You take great care of the correct and acceptable regulations within the school and offer structured knowledge to your pupils.",
                 "created_at"=>now(),
@@ -101,7 +101,7 @@ class LearningStyleSeeder extends Seeder
             [
                 "style_es"=>"Modelo Personal",
                 "style_en"=>"Personal Model",
-                "type"=>"tutors",
+                "type"=>"tutor",
                 "info_es"=>"Eres el tutor que cree ser el “ejemplo para tus estudiantes” y que por medio de tu propio desempeño les muestras a ellos las formas adecuadas para pensar y comportarse. Eres meticuloso y ordenado, y por medio de tu persona motivas a tus pupilos a emular tu propio comportamiento.",
                 "info_en"=>"You are the tutor who believes to be the “example for your students” and that through your own performance you show them the appropriate ways to think and behave. You are meticulous and orderly, and through your person you motivate your pupils to emulate your own behavior.",
                 "created_at"=>now(),
@@ -111,7 +111,7 @@ class LearningStyleSeeder extends Seeder
             [
                 "style_es"=>"Facilitador",
                 "style_en"=>"Facilitator",
-                "type"=>"tutors",
+                "type"=>"tutor",
                 "info_es"=>"Eres aquel tutor que guía a los estudiantes hacia el aprendizaje mediante cuestionamientos alternativos y toma de decisiones. Destacas el desarrollo de los estudiantes con miras a la independencia, la iniciativa y la responsabilidad. Gustas del trabajo por medio de proyectos o problemas que permiten a los estudiantes aprender por su cuenta y en los que tu función es solo de asesoría.",
                 "info_en"=>"You are the tutor who guides students towards learning through alternative questioning and decision making. You highlight the development of students with a view to independence, initiative and responsibility. You like to work through projects or problems that allow students to learn on their own and in which your role is only advisory.",
                 "created_at"=>now(),
@@ -121,7 +121,7 @@ class LearningStyleSeeder extends Seeder
             [
                 "style_es"=>"Delegador",
                 "style_en"=>"Delegator",
-                "type"=>"tutors",
+                "type"=>"tutor",
                 "info_es"=>"Eres aquel tutor que le da libertad al alumno para ser lo más autónomo posible. Motivas a los estudiantes a trabajar en proyectos de manera independiente o en pequeños equipos. Funges solamente como consultor del proyecto.",
                 "info_en"=>"You are the tutor who gives the student freedom to be as autonomous as possible. You motivate students to work on projects independently or in small teams. You only serve as a project consultant.",
                 "created_at"=>now(),
