@@ -167,8 +167,8 @@ export default {
     },
     userSexErrors(){
       const errors = [];
-      if (!this.$v.userInfo.age.$dirty) return errors;
-      !this.$v.userInfo.age.required && errors.push("Se requiere sexo.");
+      if (!this.$v.userInfo.sex.$dirty) return errors;
+      !this.$v.userInfo.sex.required && errors.push("Se requiere sexo.");
       return errors;
     }
 

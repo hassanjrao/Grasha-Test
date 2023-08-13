@@ -194,6 +194,8 @@ export default {
 
           this.userLearningStyle = response.data.data.userLearningStyle;
 
+          console.log("userLearningStyle", this.userLearningStyle);
+
           //   reset validation
           this.$v.$reset();
         })
