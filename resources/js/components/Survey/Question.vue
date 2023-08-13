@@ -43,7 +43,7 @@
 
                 <div v-if="v.selectedAnswer.$dirty">
                   <p class="text-danger" v-if="!v.selectedAnswer.required">
-                    Please select an answer.
+                    Seleccione una respuesta.
                   </p>
                 </div>
               </v-card-text>
@@ -163,7 +163,7 @@ export default {
       this.$v.$touch();
 
       if (this.$v.$invalid) {
-        this.showStatus("Please answer all the questions", "error");
+        this.showStatus("Por favor responda todas las preguntas", "error");
         return;
       }
 
