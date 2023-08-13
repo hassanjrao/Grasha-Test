@@ -23,7 +23,7 @@ class AdminStudentController extends Controller
 
         $quesObj=new Question();
 
-        $questions=$quesObj->tutorQuestions();
+        $questions=$quesObj->studentQuestions();
 
         return view("admin.students.index",compact("students","questions"));
     }

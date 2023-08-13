@@ -99,20 +99,20 @@
     <footer id="page-footer" class="bg-body-extra-light">
         <div class="content py-4">
             <div class="row align-items-center justify-content-around">
-                <div class="col-sm-8">
+                <div class="col-sm-2">
+                    <span>Powered By</span>
                     <img src="{{ asset("media/logos/logo.png") }}" class="img-fluid" style="width: 115px" alt="">
                 </div>
 
-                <div class="col-sm-2">
+                {{-- <div class="col-sm-2">
 
-                    {{-- change language drop down --}}
                     <select class="form-select" onchange="langChanged(this)">
                         <option value="en" {{  app()->getLocale() == 'en' ? 'selected' : '' }}>
                             English</option>
                         <option value="es" {{  app()->getLocale() == 'es' ? 'selected' : '' }}>
                             Español</option>
                     </select>
-                </div>
+                </div> --}}
 
             </div>
         </div>
