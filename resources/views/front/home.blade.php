@@ -75,7 +75,7 @@
 <br>
             <div class="row mt-2 justify-content-center align-items-center text-center">
 
-                <a href=""><b>{{ __("home.admin_btn_text") }}</b></a>
+                <a href="{{ route("admin.dashboard.index") }}"><b>{{ __("home.admin_btn_text") }}</b></a>
 
             </div>
 

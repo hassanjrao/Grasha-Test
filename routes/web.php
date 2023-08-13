@@ -23,13 +23,13 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware(["check.locale"]);
 
 Route::get('lang-change', [HomeController::class, 'langChange'])->name('home.langChange');
 
 
 
-Route::prefix("survey")->name("survey.")->group(function () {
+Route::prefix("survey")->middleware(["check.locale"])->name("survey.")->group(function () {
 
     Route::get("questions", [SurveyController::class, "questions"])->name("questions");
     Route::get("possible-answers", [SurveyController::class, "possibleAnswers"])->name("possible-answers");
@@ -44,7 +44,7 @@ Route::prefix("survey")->name("survey.")->group(function () {
 
 
 
-Route::middleware(["auth"])->group(function () {
+Route::middleware(["auth","check.locale"])->group(function () {
 
     Route::prefix("admin")->name("admin.")->group(function(){
         Route::get("",[AdminDashboardController::class,"index"])->name("dashboard.index");
