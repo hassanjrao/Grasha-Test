@@ -65,9 +65,9 @@
           <v-col cols="12" sm="12" md="12">
             <v-card>
               <v-card-title>
-                <div v-if="user.type == 'student'">Tu Estilo de Aprendizaje:</div>
+                <div v-if="user.type == 'student'">Tu Estilo de Aprendizaje: {{ userLearningStyle.style }}</div>
 
-                <div v-if="user.type == 'tutor'">Tu Estilo de Enseñanza:</div>
+                <div v-if="user.type == 'tutor'">Tu Estilo de Enseñanza:  {{ userLearningStyle.style }}</div>
               </v-card-title>
               <v-card-text>
                 <v-row>

@@ -52,7 +52,7 @@ class SurveyController extends Controller
         $user->assignRole($request->type);
 
         return response([
-            "message" => "Submitted successfully",
+            "message" => "Listo para Empezar",
             "data" => [
                 "user" => $user,
             ]
