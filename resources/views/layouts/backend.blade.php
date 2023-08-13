@@ -23,6 +23,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" id="css-main" href="{{ asset('css/oneui.css') }}">
 
+
+    <!-- Page JS Plugins CSS -->
+    <link rel="stylesheet" href="{{ asset('js/plugins/datatables-bs5/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/plugins/datatables-buttons-bs5/buttons.bootstrap5.min.css') }}">
+
     <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
     <!-- <link rel="stylesheet" id="css-theme" href="{{ asset('css/themes/amethyst.css') }}"> -->
     @yield('css_after')
@@ -305,9 +310,9 @@
             <div class="content py-3">
                 <div class="row fs-sm">
 
-                    <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-start">
-                        <a class="fw-semibold" href="https://1.envato.market/AVD6j"
-                            target="_blank">{{ __("admin.powered_by") }}</a>
+                    <div class="col-sm-6 order-sm-1 py-1 text-center text-end">
+                        <span>Powered By</span>
+                        <img src="{{ asset("media/logos/logo.png") }}" class="img-fluid" style="width: 115px" alt="">
                     </div>
                 </div>
             </div>

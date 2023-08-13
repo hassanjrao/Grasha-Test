@@ -71,8 +71,8 @@
 
                                     </div>
                                     <div class="row mb-4">
-                                        <div class="col-md-12 col-xl-5">
-                                            <button type="submit" class="btn w-100 btn-alt-primary">
+                                        <div class="col-md-12 col-xl-12 text-center">
+                                            <button type="submit" class="btn btn-alt-primary">
                                                 <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> {{ __("admin.sign_in") }}
                                             </button>
                                         </div>
@@ -87,8 +87,8 @@
                 </div>
             </div>
             <div class="fs-sm text-muted text-center">
-                <strong>{{ config("app.name") }}, {{ __("admin.all_rights_reserved") }}</strong> &copy; <span
-                    data-toggle="year-copy"></span>
+                <span>Powered By</span>
+                <img src="{{ asset("media/logos/logo.png") }}" class="img-fluid" style="width: 115px" alt="">
             </div>
             <br>
         </div>

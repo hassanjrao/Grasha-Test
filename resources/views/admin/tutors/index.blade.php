@@ -28,7 +28,7 @@
                 <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/tables_datatables.js -->
                 <div class="table-responsive">
 
-                    <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                    <table class="table table-bordered table-striped table-vcenter  js-dataTable-buttons">
                         <thead>
                             <tr>
                                 <th>{{ __("admin.index") }}</th>
