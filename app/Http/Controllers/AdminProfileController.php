@@ -70,10 +70,12 @@ class AdminProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // email should belong to this domain:@ayudinga.org
 
         $request->validate([
             "name"=>"required",
-            "email"=>"required|email|unique:users,email,".$id,
+            "email"=>"required|email|unique:users,email,".$id ,
+            "email"=>"regex:/^[a-zA-Z0-9_.+-]+@ayudinga.org$/i"
         ]);
 
         $user=User::findOrFail($id);

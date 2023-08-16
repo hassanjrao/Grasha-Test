@@ -49,10 +49,12 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // email should belong to this domain:@ayudinga.org
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users','regex:/^[a-zA-Z0-9_.+-]+@ayudinga.org$/i'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            "position"=>["required"],
         ]);
     }
 
@@ -64,10 +66,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            "position"=>$data["position"],
         ]);
+
+        $user->assignRole("admin");
+
+        return $user;
     }
 }

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);
+Auth::routes(['reset' => false, 'verify' => false]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware(["check.locale"]);
 

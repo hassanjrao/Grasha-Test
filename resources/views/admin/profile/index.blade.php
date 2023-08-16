@@ -24,21 +24,28 @@
                         <div class="col-lg-12 ">
 
                             <div class="row mb-4">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label class="form-label" for="label">{{ __("admin.name") }}</label>
                                     <input required type="text" value="{{ $user->name }}" class="form-control"
                                         id="name" name="name">
                                 </div>
-                                <div class="col-6">
+
+                                <div class="col-4">
+                                    <label class="form-label" for="label">{{ __("admin.position") }}</label>
+                                    <input required type="text" value="{{ $user->position }}" class="form-control"
+                                        id="position" name="position">
+                                </div>
+
+                                <div class="col-4">
                                     <label class="form-label" for="label">{{ __("admin.email") }}</label>
                                     <input required type="text" value="{{ $user->email }}" class="form-control"
                                         id="email" name="email">
                                 </div>
 
-
                             </div>
 
                             <div class="row mb-4">
+
                                 <div class="col-6">
                                     <label class="form-label" for="label">{{ __("admin.old_password") }}</label>
                                     <input type="password"  class="form-control"
