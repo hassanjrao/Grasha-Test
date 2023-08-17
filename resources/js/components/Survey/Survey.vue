@@ -3,7 +3,8 @@
     <v-container>
       <v-card>
         <v-card-title class="text-center">
-          <h2 class="pt-2">Cuestionario de Estilos de Enseñanza | Test de Grasha</h2>
+          <h2 class="pt-2" v-if="userInfo.type=='Tutor'">Cuestionario de Estilos de Enseñanza | Test de Grasha</h2>
+          <h2 class="pt-2" v-else>Cuestionarios de Estilos de Aprendizaje | Test de Grasha</h2>
         </v-card-title>
         <v-card-text>
           <v-row>
@@ -11,8 +12,8 @@
               <v-select
                 v-model="userInfo.type"
                 :items="[
-                {text:'Estudiante',value:'Student'},
-                {text:'Tutor',value:'Tutor'},
+                  { text: 'Estudiante', value: 'Student' },
+                  { text: 'Tutor', value: 'Tutor' },
                 ]"
                 label="Estudiante/Tutor"
                 required
@@ -24,10 +25,11 @@
             </v-col>
             <v-col cols="12" sm="6" md="2">
               <v-text-field
-                v-model="userInfo.name"
-                label="Nombre"
+                v-model.u="userInfo.name"
+                label="Nombre y Apellido"
                 required
                 :disabled="useInfoDisabled"
+                hint="Ejemplo: Carlos Pérez"
                 @input="$v.userInfo.name.$touch()"
                 :error-messages="userNameErrors"
                 @blur="$v.userInfo.name.$touch()"
@@ -39,6 +41,7 @@
                 type="number"
                 min="1"
                 label="Edad"
+                hint="Ejemplo: 25"
                 required
                 :disabled="useInfoDisabled"
                 @input="$v.userInfo.age.$touch()"
@@ -51,8 +54,8 @@
               <v-select
                 v-model="userInfo.sex"
                 :items="[
-                {text:'Masculino',value:'Masculino'},
-                {text:'Femenino',value:'Femenino'}
+                  { text: 'Masculino', value: 'Masculino' },
+                  { text: 'Femenino', value: 'Femenino' },
                 ]"
                 label="Sexo"
                 required
@@ -60,7 +63,6 @@
                 :error-messages="userSexErrors"
                 @blur="$v.userInfo.sex.$touch()"
               ></v-select>
-
             </v-col>
 
             <v-col cols="12" sm="6" md="4">
@@ -85,10 +87,24 @@
                 v-if="!useInfoDisabled"
                 :loading="submitUserInfoLoading"
                 @click="submitUserInfo"
-                >
-                Enviar y Empezar
-                </v-btn
               >
+                Enviar y Empezar
+              </v-btn>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="12" sm="12" md="12" v-if="userInfo.type=='Tutor'">
+              <h6>Cuestionarios de Estilos de Enseñanza - Tutores</h6>
+              <p>
+                Este test te permite identificar tu enfoque y metodología al enseñar, ofreciéndote detalles para potenciar tus habilidades y adaptarte a las necesidades de tus estudiantes.
+              </p>
+            </v-col>
+            <v-col cols="12" sm="12" md="12" v-else>
+              <h6>Cuestionarios de Estilos de Aprendizaje - Estudiantes</h6>
+              <p>
+                Este test te guía hacia la comprensión de cómo procesas y asimilas información, brindándote herramientas para maximizar tu aprendizaje y disfrutar del proceso.
+              </p>
             </v-col>
           </v-row>
         </v-card-text>
@@ -103,18 +119,17 @@
 
 <script>
 import { required, requiredIf, email } from "vuelidate/lib/validators";
-import alert from '../../shared/alert'
+import alert from "../../shared/alert";
 
 import Question from "./Question.vue";
 
 export default {
-
-    props:{
-        type:{
-            type:String,
-            required:true
-        }
+  props: {
+    type: {
+      type: String,
+      required: true,
     },
+  },
 
   validations: {
     userInfo: {
@@ -134,8 +149,7 @@ export default {
       },
       sex: {
         required,
-      }
-
+      },
     },
   },
 
@@ -147,38 +161,39 @@ export default {
       return errors;
     },
     userNameErrors() {
+      // this.userInfo.name = this.userInfo.name.toUpperCase();
       const errors = [];
       if (!this.$v.userInfo.name.$dirty) return errors;
-      !this.$v.userInfo.name.required && errors.push("Se requiere el nombre.");
+      !this.$v.userInfo.name.required && errors.push("Se requiere el Nombre y Apellido. Ejemplo: Carlos Pérez");
       return errors;
     },
     userEmailErrors() {
       const errors = [];
       if (!this.$v.userInfo.email.$dirty) return errors;
       !this.$v.userInfo.email.required && errors.push("Correo electronico es requerido.");
-      !this.$v.userInfo.email.email && errors.push("Debe ser válido el correo electrónico");
+      !this.$v.userInfo.email.email &&
+        errors.push("Debe ser válido el correo electrónico");
       return errors;
     },
     userAgeErrors() {
       const errors = [];
       if (!this.$v.userInfo.age.$dirty) return errors;
-      !this.$v.userInfo.age.required && errors.push("Se requiere edad.");
+      !this.$v.userInfo.age.required && errors.push("Se requiere edad. Ejemplo: 25");
       return errors;
     },
-    userSexErrors(){
+    userSexErrors() {
       const errors = [];
       if (!this.$v.userInfo.sex.$dirty) return errors;
       !this.$v.userInfo.sex.required && errors.push("Se requiere sexo.");
       return errors;
-    }
-
+    },
   },
 
   created() {
     this.showStatus = alert.showStatus;
 
     this.userInfo.type = this.type;
-    console.log("type",this.type);
+    console.log("type", this.type);
   },
   data() {
     return {
@@ -188,16 +203,20 @@ export default {
         name: "",
         email: "",
         age: "",
-        sex: ""
+        sex: "",
       },
       useInfoDisabled: false,
       submitUserInfoLoading: false,
       baseURL: "/survey",
-      user:null,
+      user: null,
     };
   },
 
   methods: {
+    uppercase() {
+      this.userInfo.name = this.userInfo.name.toUpperCase();
+    },
+
     submitUserInfo() {
       this.$v.$touch();
       if (this.$v.$invalid) {
@@ -208,15 +227,14 @@ export default {
 
       axios
         .post(this.baseURL + "/submit-user-info", {
-            name: this.userInfo.name.toLowerCase(),
-            email: this.userInfo.email.toLowerCase(),
-            type: this.userInfo.type.toLowerCase(),
-            age:this.userInfo.age,
-            sex: this.userInfo.sex.toLowerCase(),
+          name: this.userInfo.name.toLowerCase(),
+          email: this.userInfo.email.toLowerCase(),
+          type: this.userInfo.type.toLowerCase(),
+          age: this.userInfo.age,
+          sex: this.userInfo.sex.toLowerCase(),
         })
         .then((response) => {
-
-            console.log(response);
+          console.log(response);
 
           this.submitUserInfoLoading = false;
 
@@ -224,23 +242,28 @@ export default {
 
           this.user.type = this.userInfo.type.toLowerCase();
 
-          console.log("user",this.user);
+          console.log("user", this.user);
 
           this.showStatus(response.data.message, "success");
 
-            this.useInfoDisabled = true;
-
+          this.useInfoDisabled = true;
         })
         .catch((error) => {
           console.log(error);
           this.submitUserInfoLoading = false;
-            this.showStatus(error.response.data.message, "error");
+          this.showStatus(error.response.data.message, "error");
         });
     },
   },
 
-  components:{
-    Question
-  }
+  components: {
+    Question,
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+.text-uppercase {
+  text-transform: uppercase;
+}
+</style>

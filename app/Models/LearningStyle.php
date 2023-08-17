@@ -28,5 +28,15 @@ class LearningStyle extends Model
         return $this->hasMany(Question::class);
     }
 
+    public function characteristics()
+    {
+        return $this->hasMany(LearningStyleCharacteristic::class,"learning_style_id");
+    }
+
+    public function recommendedTechniques()
+    {
+        return $this->hasMany(LearningStyleRecommendedTechnique::class,"learning_style_id");
+    }
+
 
 }

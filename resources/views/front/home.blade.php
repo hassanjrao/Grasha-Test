@@ -21,21 +21,22 @@
                 <div class="col-lg-7">
 
                     <div class="row">
+
                         <div class="col-lg-12">
 
-                            <h5>{{ __('home.mission') }}</h5>
+                            <h5>{{ __('home.tutors') }}</h5>
 
                             <p>
-                                {{ __('home.mission_description') }}
+                                {{ __('home.tutors_description') }}
                             </p>
 
                         </div>
                         <div class="col-lg-12">
 
-                            <h5>{{ __('home.vision') }}</h5>
+                            <h5>{{ __('home.students') }}</h5>
 
                             <p>
-                                {{ __('home.vision_description') }}
+                                {{ __('home.students_description') }}
                             </p>
 
                         </div>
@@ -45,7 +46,7 @@
                 </div>
 
                 <div class="col-lg-5">
-                    <img src="{{ asset('media/logos/pilando-ando.jpg') }}" class="img-fluid">
+                    <img src="{{ asset('media/logos/pilandoando-image.jpg   ') }}" class="img-fluid">
                 </div>
 
 

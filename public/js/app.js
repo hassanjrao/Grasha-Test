@@ -5159,7 +5159,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$v.$touch();
 
       if (this.$v.$invalid) {
-        this.showStatus("Please answer all the questions", "error");
+        this.showStatus("Por favor responda todas las preguntas", "error");
         return;
       }
 
@@ -5180,7 +5180,8 @@ __webpack_require__.r(__webpack_exports__);
         _this3.loading = false; // scroll to top
 
         window.scrollTo(0, 0);
-        _this3.userLearningStyle = response.data.data.userLearningStyle; //   reset validation
+        _this3.userLearningStyle = response.data.data.userLearningStyle;
+        console.log("userLearningStyle", _this3.userLearningStyle); //   reset validation
 
         _this3.$v.$reset();
       })["catch"](function (error) {
@@ -5253,9 +5254,10 @@ __webpack_require__.r(__webpack_exports__);
       return errors;
     },
     userNameErrors: function userNameErrors() {
+      // this.userInfo.name = this.userInfo.name.toUpperCase();
       var errors = [];
       if (!this.$v.userInfo.name.$dirty) return errors;
-      !this.$v.userInfo.name.required && errors.push("Se requiere el nombre.");
+      !this.$v.userInfo.name.required && errors.push("Se requiere el Nombre y Apellido. Ejemplo: Carlos Pérez");
       return errors;
     },
     userEmailErrors: function userEmailErrors() {
@@ -5268,13 +5270,13 @@ __webpack_require__.r(__webpack_exports__);
     userAgeErrors: function userAgeErrors() {
       var errors = [];
       if (!this.$v.userInfo.age.$dirty) return errors;
-      !this.$v.userInfo.age.required && errors.push("Se requiere edad.");
+      !this.$v.userInfo.age.required && errors.push("Se requiere edad. Ejemplo: 25");
       return errors;
     },
     userSexErrors: function userSexErrors() {
       var errors = [];
-      if (!this.$v.userInfo.age.$dirty) return errors;
-      !this.$v.userInfo.age.required && errors.push("Se requiere sexo.");
+      if (!this.$v.userInfo.sex.$dirty) return errors;
+      !this.$v.userInfo.sex.required && errors.push("Se requiere sexo.");
       return errors;
     }
   },
@@ -5300,6 +5302,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    uppercase: function uppercase() {
+      this.userInfo.name = this.userInfo.name.toUpperCase();
+    },
     submitUserInfo: function submitUserInfo() {
       var _this = this;
 
@@ -5416,7 +5421,7 @@ var render = function render() {
       });
     }), 1), _vm._v(" "), _vm.v.selectedAnswer.$dirty ? _c("div", [!_vm.v.selectedAnswer.required ? _c("p", {
       staticClass: "text-danger"
-    }, [_vm._v("\n                  Please select an answer.\n                ")]) : _vm._e()]) : _vm._e()], 1)], 1);
+    }, [_vm._v("\n                  Seleccione una respuesta.\n                ")]) : _vm._e()]) : _vm._e()], 1)], 1);
   }), 1)], 1) : _vm._e(), _vm._v(" "), !_vm.userLearningStyle ? _c("v-row", {
     staticClass: "justify-content-end"
   }, [_c("v-col", {
@@ -5440,7 +5445,7 @@ var render = function render() {
       sm: "12",
       md: "12"
     }
-  }, [_c("v-card", [_c("v-card-title", [_vm.user.type == "student" ? _c("div", [_vm._v("Tu Estilo de Aprendizaje:")]) : _vm._e(), _vm._v(" "), _vm.user.type == "tutor" ? _c("div", [_vm._v("Tu Estilo de Enseñanza:")]) : _vm._e()]), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-col", {
+  }, [_c("v-card", [_c("v-card-title", [_vm.user.type == "student" ? _c("div", [_vm._v("Tu Estilo de Aprendizaje: " + _vm._s(_vm.userLearningStyle.style))]) : _vm._e(), _vm._v(" "), _vm.user.type == "tutor" ? _c("div", [_vm._v("Tu Estilo de Enseñanza:  " + _vm._s(_vm.userLearningStyle.style))]) : _vm._e()]), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-col", {
     attrs: {
       cols: "12",
       sm: "12",
@@ -5465,10 +5470,10 @@ render._withStripped = true;
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Survey/Survey.vue?vue&type=template&id=74416018&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Survey/Survey.vue?vue&type=template&id=74416018& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Survey/Survey.vue?vue&type=template&id=74416018&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Survey/Survey.vue?vue&type=template&id=74416018&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -5487,9 +5492,11 @@ var render = function render() {
     }
   }, [_c("v-container", [_c("v-card", [_c("v-card-title", {
     staticClass: "text-center"
-  }, [_c("h2", {
+  }, [_vm.userInfo.type == "Tutor" ? _c("h2", {
     staticClass: "pt-2"
-  }, [_vm._v("Cuestionario de Estilos de Enseñanza | Test de Grasha")])]), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-col", {
+  }, [_vm._v("Cuestionario de Estilos de Enseñanza | Test de Grasha")]) : _c("h2", {
+    staticClass: "pt-2"
+  }, [_vm._v("Cuestionarios de Estilos de Aprendizaje | Test de Grasha")])]), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-col", {
     attrs: {
       cols: "12",
       sm: "6",
@@ -5532,9 +5539,10 @@ var render = function render() {
     }
   }, [_c("v-text-field", {
     attrs: {
-      label: "Nombre",
+      label: "Nombre y Apellido",
       required: "",
       disabled: _vm.useInfoDisabled,
+      hint: "Ejemplo: Carlos Pérez",
       "error-messages": _vm.userNameErrors
     },
     on: {
@@ -5563,6 +5571,7 @@ var render = function render() {
       type: "number",
       min: "1",
       label: "Edad",
+      hint: "Ejemplo: 25",
       required: "",
       disabled: _vm.useInfoDisabled,
       "error-messages": _vm.userAgeErrors
@@ -5661,7 +5670,19 @@ var render = function render() {
     on: {
       click: _vm.submitUserInfo
     }
-  }, [_vm._v("\n              Enviar y Empezar\n              ")]) : _vm._e()], 1)], 1)], 1)], 1), _vm._v(" "), _c("v-divider"), _vm._v(" "), _vm.user ? _c("Question", {
+  }, [_vm._v("\n              Enviar y Empezar\n            ")]) : _vm._e()], 1)], 1), _vm._v(" "), _c("v-row", [_vm.userInfo.type == "Tutor" ? _c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "12",
+      md: "12"
+    }
+  }, [_c("h6", [_vm._v("Cuestionarios de Estilos de Enseñanza - Tutores")]), _vm._v(" "), _c("p", [_vm._v("\n              Este test te permite identificar tu enfoque y metodología al enseñar, ofreciéndote detalles para potenciar tus habilidades y adaptarte a las necesidades de tus estudiantes.\n            ")])]) : _c("v-col", {
+    attrs: {
+      cols: "12",
+      sm: "12",
+      md: "12"
+    }
+  }, [_c("h6", [_vm._v("Cuestionarios de Estilos de Aprendizaje - Estudiantes")]), _vm._v(" "), _c("p", [_vm._v("\n              Este test te guía hacia la comprensión de cómo procesas y asimilas información, brindándote herramientas para maximizar tu aprendizaje y disfrutar del proceso.\n            ")])])], 1)], 1)], 1), _vm._v(" "), _c("v-divider"), _vm._v(" "), _vm.user ? _c("Question", {
     attrs: {
       user: _vm.user
     }
@@ -11092,6 +11113,30 @@ defineJQueryPlugin(Toast);
 
 
 //# sourceMappingURL=bootstrap.esm.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Survey/Survey.vue?vue&type=style&index=0&id=74416018&lang=scss&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Survey/Survey.vue?vue&type=style&index=0&id=74416018&lang=scss&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".text-uppercase[data-v-74416018] {\n  text-transform: uppercase;\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
@@ -28826,23 +28871,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Survey_vue_vue_type_template_id_74416018___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Survey.vue?vue&type=template&id=74416018& */ "./resources/js/components/Survey/Survey.vue?vue&type=template&id=74416018&");
+/* harmony import */ var _Survey_vue_vue_type_template_id_74416018_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Survey.vue?vue&type=template&id=74416018&scoped=true& */ "./resources/js/components/Survey/Survey.vue?vue&type=template&id=74416018&scoped=true&");
 /* harmony import */ var _Survey_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Survey.vue?vue&type=script&lang=js& */ "./resources/js/components/Survey/Survey.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Survey_vue_vue_type_style_index_0_id_74416018_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Survey.vue?vue&type=style&index=0&id=74416018&lang=scss&scoped=true& */ "./resources/js/components/Survey/Survey.vue?vue&type=style&index=0&id=74416018&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _Survey_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Survey_vue_vue_type_template_id_74416018___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Survey_vue_vue_type_template_id_74416018___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Survey_vue_vue_type_template_id_74416018_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Survey_vue_vue_type_template_id_74416018_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  null,
+  "74416018",
   null
   
 )
@@ -28903,19 +28950,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Survey/Survey.vue?vue&type=template&id=74416018&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/Survey/Survey.vue?vue&type=template&id=74416018& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/Survey/Survey.vue?vue&type=template&id=74416018&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Survey/Survey.vue?vue&type=template&id=74416018&scoped=true& ***!
+  \**********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Survey_vue_vue_type_template_id_74416018___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Survey_vue_vue_type_template_id_74416018___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Survey_vue_vue_type_template_id_74416018_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Survey_vue_vue_type_template_id_74416018_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Survey_vue_vue_type_template_id_74416018___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Survey.vue?vue&type=template&id=74416018& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Survey/Survey.vue?vue&type=template&id=74416018&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Survey_vue_vue_type_template_id_74416018_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Survey.vue?vue&type=template&id=74416018&scoped=true& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Survey/Survey.vue?vue&type=template&id=74416018&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Survey/Survey.vue?vue&type=style&index=0&id=74416018&lang=scss&scoped=true&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/components/Survey/Survey.vue?vue&type=style&index=0&id=74416018&lang=scss&scoped=true& ***!
+  \*************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Survey_vue_vue_type_style_index_0_id_74416018_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-style-loader/index.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Survey.vue?vue&type=style&index=0&id=74416018&lang=scss&scoped=true& */ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Survey/Survey.vue?vue&type=style&index=0&id=74416018&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Survey_vue_vue_type_style_index_0_id_74416018_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Survey_vue_vue_type_style_index_0_id_74416018_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
+/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Survey_vue_vue_type_style_index_0_id_74416018_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Survey_vue_vue_type_style_index_0_id_74416018_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
+/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
 
 
 /***/ }),
@@ -29028,6 +29092,27 @@ function normalizeComponent(
   }
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Survey/Survey.vue?vue&type=style&index=0&id=74416018&lang=scss&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Survey/Survey.vue?vue&type=style&index=0&id=74416018&lang=scss&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Survey.vue?vue&type=style&index=0&id=74416018&lang=scss&scoped=true& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Survey/Survey.vue?vue&type=style&index=0&id=74416018&lang=scss&scoped=true&");
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! !../../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
+var update = add("7d84f64f", content, false, {});
+// Hot Module Replacement
+if(false) {}
 
 /***/ }),
 

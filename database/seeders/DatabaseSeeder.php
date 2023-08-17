@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             PossibleAnswerSeeder::class,
             QuestionSeeder::class,
             QuestionTutorSeeder::class,
+            LearningStyleCharacteristicSeeder::class,
         ]);
     }
 }

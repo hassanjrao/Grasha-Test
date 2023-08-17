@@ -9,4 +9,8 @@ return [
     "student_btn_text"=>"Soy estudiante",
     "tutor_btn_text"=>"Soy tutor",
     "admin_btn_text"=>"Espacio de administración",
+    "students"=>"Estudiantes",
+    "tutors"=>"Tutores",
+    "students_description"=>"¿Te has preguntado cómo captas el conocimiento? Cada estudiante tiene una forma especial de aprender, y conocerla puede ser la clave para un aprendizaje más efectivo y disfrutable. Con el Test de Grasha - Riechmann, descubrirás tu estilo de aprendizaje y recibirás consejos para sacarle el máximo provecho a cada tutoría.",
+    "tutors_description"=>"¿Eres un apasionado de la enseñanza? Cada tutor tiene un estilo único que define su conexión con los estudiantes. Descubre cómo fluye tu enseñanza y cómo puedes potenciarla. El Test de Grasha - Riechmann te brindará detalles valiosos para enriquecer cada sesión y crear experiencias educativas inolvidables.",
 ];

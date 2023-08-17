@@ -17,6 +17,7 @@ class SurveyController extends Controller
 
         $type=strtolower($type);
 
+
         if(!in_array($type,["student","tutor"])){
             abort(404);
         }
