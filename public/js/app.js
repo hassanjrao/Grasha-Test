@@ -5445,13 +5445,17 @@ var render = function render() {
       sm: "12",
       md: "12"
     }
-  }, [_c("v-card", [_c("v-card-title", [_vm.user.type == "student" ? _c("div", [_vm._v("Tu Estilo de Aprendizaje: " + _vm._s(_vm.userLearningStyle.style))]) : _vm._e(), _vm._v(" "), _vm.user.type == "tutor" ? _c("div", [_vm._v("Tu Estilo de Enseñanza:  " + _vm._s(_vm.userLearningStyle.style))]) : _vm._e()]), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-col", {
+  }, [_c("v-card", [_c("v-card-title", [_vm.user.type == "student" ? _c("div", [_vm._v("\n                Tu Estilo de Aprendizaje: " + _vm._s(_vm.userLearningStyle.style) + "\n              ")]) : _vm._e(), _vm._v(" "), _vm.user.type == "tutor" ? _c("div", [_vm._v("\n                Tu Estilo de Enseñanza: " + _vm._s(_vm.userLearningStyle.style) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-col", {
     attrs: {
       cols: "12",
       sm: "12",
       md: "8"
     }
-  }, [_c("p", [_c("strong", [_vm._v(_vm._s(_vm.userLearningStyle.info))])])]), _vm._v(" "), _c("v-col", {
+  }, [_c("div", [_c("h4", [_vm._v("Descripción:")]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.userLearningStyle.description_es))])]), _vm._v(" "), _c("div", [_c("h4", [_vm._v("Características:")]), _vm._v(" "), _c("ul", _vm._l(_vm.userLearningStyle.characteristics, function (characteristic) {
+    return _c("li", [_vm._v("\n                        " + _vm._s(characteristic.characteristic_es) + "\n                      ")]);
+  }), 0)]), _vm._v(" "), _c("div", [_c("h4", [_vm._v("Técnicas de Estudio:")]), _vm._v(" "), _c("ul", _vm._l(_vm.userLearningStyle.recommendedTechniques, function (technique) {
+    return _c("li", [_vm._v("\n                        " + _vm._s(technique.technique_es) + "\n                      ")]);
+  }), 0)])]), _vm._v(" "), _c("v-col", {
     attrs: {
       cols: "12",
       sm: "12",

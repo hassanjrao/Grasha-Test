@@ -65,20 +65,50 @@
           <v-col cols="12" sm="12" md="12">
             <v-card>
               <v-card-title>
-                <div v-if="user.type == 'student'">Tu Estilo de Aprendizaje: {{ userLearningStyle.style }}</div>
+                <div v-if="user.type == 'student'">
+                  Tu Estilo de Aprendizaje: {{ userLearningStyle.style }}
+                </div>
 
-                <div v-if="user.type == 'tutor'">Tu Estilo de Enseñanza:  {{ userLearningStyle.style }}</div>
+                <div v-if="user.type == 'tutor'">
+                  Tu Estilo de Enseñanza: {{ userLearningStyle.style }}
+                </div>
               </v-card-title>
               <v-card-text>
                 <v-row>
                   <v-col cols="12" sm="12" md="8">
-                    <p>
+                    <!-- <p>
                       <strong>{{ userLearningStyle.info }}</strong>
-                    </p>
+                    </p> -->
+
+                    <!-- description -->
+                    <div>
+                      <h4>Descripción:</h4>
+                      <p>{{ userLearningStyle.description_es }}</p>
+                    </div>
+
+                    <!-- charateristics List-->
+
+                    <div>
+                      <h4>Características:</h4>
+                      <ul>
+                        <li v-for="characteristic in userLearningStyle.characteristics">
+                          {{ characteristic.characteristic_es }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <!-- techniques -->
+                    <div>
+                      <h4>Técnicas de Estudio:</h4>
+                      <ul>
+                        <li v-for="technique in userLearningStyle.recommendedTechniques">
+                          {{ technique.technique_es }}
+                        </li>
+                      </ul>
+                    </div>
                   </v-col>
                   <v-col cols="12" sm="12" md="4">
-
-                    <v-img :src="userLearningStyle.image" ></v-img>
+                    <v-img :src="userLearningStyle.image"></v-img>
                   </v-col>
                 </v-row>
               </v-card-text>

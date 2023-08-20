@@ -193,6 +193,8 @@ class User extends Authenticatable
             $learningStyle->info = $learningStyle->info;
             $learningStyle->image = asset($learningStyle->image);
             $learningStyle->style= $learningStyle->style;
+            $learningStyle->characteristics=$learningStyle->characteristics;
+            $learningStyle->recommendedTechniques=$learningStyle->recommendedTechniques;
         }
 
 
@@ -353,6 +355,9 @@ class User extends Authenticatable
             $learningStyle->info = $learningStyle->info;
             $learningStyle->image = asset($learningStyle->image);
             $learningStyle->style= $learningStyle->style;
+            $learningStyle->characteristics=$learningStyle->characteristics;
+            $learningStyle->recommendedTechniques=$learningStyle->recommendedTechniques;
+
         }
 
 
