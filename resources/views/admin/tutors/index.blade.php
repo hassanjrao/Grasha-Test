@@ -105,5 +105,7 @@
 
 @section('js_after')
 
+<script src="{{ asset('js/pages/tables_datatables_tutors.js') }}"></script>
+
 
 @endsection
