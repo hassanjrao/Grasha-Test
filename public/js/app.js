@@ -5133,10 +5133,14 @@ __webpack_require__.r(__webpack_exports__);
           offset: this.offset,
           limit: this.limit,
           user_id: this.user.id,
-          type: this.user.type
+          type: this.user.type,
+          existing_user: this.user.existingUser
         }
       }).then(function (response) {
         _this.questions = response.data.data.questions;
+        _this.progress = response.data.data.progress;
+        _this.offset = response.data.data.offset;
+        _this.limit = response.data.data.limit;
         console.log("Questions", _this.questions);
       })["catch"](function (error) {
         console.log(error);
@@ -5293,20 +5297,48 @@ __webpack_require__.r(__webpack_exports__);
         name: "",
         email: "",
         age: "",
-        sex: ""
+        sex: "",
+        existingUser: false
       },
       useInfoDisabled: false,
       submitUserInfoLoading: false,
       baseURL: "/survey",
-      user: null
+      user: null,
+      userExistsDialog: false,
+      existingUser: null
     };
   },
   methods: {
     uppercase: function uppercase() {
       this.userInfo.name = this.userInfo.name.toUpperCase();
     },
-    submitUserInfo: function submitUserInfo() {
+    continueUser: function continueUser(_continueUser) {
       var _this = this;
+
+      this.userExistsDialog = false;
+      this.useInfoDisabled = true;
+
+      if (_continueUser) {
+        this.user = this.existingUser;
+        this.user.type = this.userInfo.type.toLowerCase();
+        this.user.existingUser = true;
+        return;
+      }
+
+      axios.post(this.baseURL + "/remove-user-responses", {
+        user_id: this.existingUser.id
+      }).then(function (response) {
+        console.log(response);
+        _this.user = response.data.data.user;
+        _this.user.type = _this.userInfo.type.toLowerCase();
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this.showStatus(error.response.data.message, "error");
+      });
+    },
+    submitUserInfo: function submitUserInfo() {
+      var _this2 = this;
 
       this.$v.$touch();
 
@@ -5323,19 +5355,26 @@ __webpack_require__.r(__webpack_exports__);
         sex: this.userInfo.sex.toLowerCase()
       }).then(function (response) {
         console.log(response);
-        _this.submitUserInfoLoading = false;
-        _this.user = response.data.data.user;
-        _this.user.type = _this.userInfo.type.toLowerCase();
-        console.log("user", _this.user);
+        var userExists = response.data.data.userExists;
+        _this2.submitUserInfoLoading = false;
 
-        _this.showStatus(response.data.message, "success");
+        if (userExists) {
+          _this2.userExistsDialog = true;
+          _this2.existingUser = response.data.data.user;
+          return;
+        }
 
-        _this.useInfoDisabled = true;
+        _this2.user = response.data.data.user;
+        _this2.user.type = _this2.userInfo.type.toLowerCase();
+        _this2.useInfoDisabled = true;
+        console.log("user", _this2.user);
+
+        _this2.showStatus(response.data.message, "success");
       })["catch"](function (error) {
         console.log(error);
-        _this.submitUserInfoLoading = false;
+        _this2.submitUserInfoLoading = false;
 
-        _this.showStatus(error.response.data.message, "error");
+        _this2.showStatus(error.response.data.message, "error");
       });
     }
   },
@@ -5498,9 +5537,9 @@ var render = function render() {
     staticClass: "text-center"
   }, [_vm.userInfo.type == "Tutor" ? _c("h2", {
     staticClass: "pt-2"
-  }, [_vm._v("Cuestionario de Estilos de Enseñanza | Test de Grasha")]) : _c("h2", {
+  }, [_vm._v("\n          Cuestionario de Estilos de Enseñanza | Test de Grasha\n        ")]) : _c("h2", {
     staticClass: "pt-2"
-  }, [_vm._v("Cuestionarios de Estilos de Aprendizaje | Test de Grasha")])]), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-col", {
+  }, [_vm._v("\n          Cuestionarios de Estilos de Aprendizaje | Test de Grasha\n        ")])]), _vm._v(" "), _c("v-card-text", [_c("v-row", [_c("v-col", {
     attrs: {
       cols: "12",
       sm: "6",
@@ -5680,17 +5719,55 @@ var render = function render() {
       sm: "12",
       md: "12"
     }
-  }, [_c("h6", [_vm._v("Cuestionarios de Estilos de Enseñanza - Tutores")]), _vm._v(" "), _c("p", [_vm._v("\n              Este test te permite identificar tu enfoque y metodología al enseñar, ofreciéndote detalles para potenciar tus habilidades y adaptarte a las necesidades de tus estudiantes.\n            ")])]) : _c("v-col", {
+  }, [_c("h6", [_vm._v("Cuestionarios de Estilos de Enseñanza - Tutores")]), _vm._v(" "), _c("p", [_vm._v("\n              Este test te permite identificar tu enfoque y metodología al enseñar,\n              ofreciéndote detalles para potenciar tus habilidades y adaptarte a las\n              necesidades de tus estudiantes.\n            ")])]) : _c("v-col", {
     attrs: {
       cols: "12",
       sm: "12",
       md: "12"
     }
-  }, [_c("h6", [_vm._v("Cuestionarios de Estilos de Aprendizaje - Estudiantes")]), _vm._v(" "), _c("p", [_vm._v("\n              Este test te guía hacia la comprensión de cómo procesas y asimilas información, brindándote herramientas para maximizar tu aprendizaje y disfrutar del proceso.\n            ")])])], 1)], 1)], 1), _vm._v(" "), _c("v-divider"), _vm._v(" "), _vm.user ? _c("Question", {
+  }, [_c("h6", [_vm._v("Cuestionarios de Estilos de Aprendizaje - Estudiantes")]), _vm._v(" "), _c("p", [_vm._v("\n              Este test te guía hacia la comprensión de cómo procesas y asimilas\n              información, brindándote herramientas para maximizar tu aprendizaje y\n              disfrutar del proceso.\n            ")])])], 1)], 1)], 1), _vm._v(" "), _c("v-divider"), _vm._v(" "), [_c("v-row", {
+    attrs: {
+      justify: "center"
+    }
+  }, [_c("v-dialog", {
+    attrs: {
+      persistent: "",
+      "max-width": "290"
+    },
+    model: {
+      value: _vm.userExistsDialog,
+      callback: function callback($$v) {
+        _vm.userExistsDialog = $$v;
+      },
+      expression: "userExistsDialog"
+    }
+  }, [_c("v-card", [_c("v-card-text", {
+    staticClass: "text-center"
+  }, [_vm._v("¿Quieres continuar con el Cuestionario")]), _vm._v(" "), _c("v-card-actions", [_c("v-spacer"), _vm._v(" "), _c("v-btn", {
+    attrs: {
+      color: "red darken-1",
+      text: ""
+    },
+    on: {
+      click: function click($event) {
+        return _vm.continueUser(false);
+      }
+    }
+  }, [_vm._v(" No ")]), _vm._v(" "), _c("v-btn", {
+    attrs: {
+      color: "green darken-1",
+      text: ""
+    },
+    on: {
+      click: function click($event) {
+        return _vm.continueUser(true);
+      }
+    }
+  }, [_vm._v("\n                Sí\n              ")])], 1)], 1)], 1)], 1)], _vm._v(" "), _vm.user ? _c("Question", {
     attrs: {
       user: _vm.user
     }
-  }) : _vm._e()], 1)], 1);
+  }) : _vm._e()], 2)], 1);
 };
 
 var staticRenderFns = [];

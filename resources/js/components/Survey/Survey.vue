@@ -3,8 +3,12 @@
     <v-container>
       <v-card>
         <v-card-title class="text-center">
-          <h2 class="pt-2" v-if="userInfo.type=='Tutor'">Cuestionario de Estilos de Enseñanza | Test de Grasha</h2>
-          <h2 class="pt-2" v-else>Cuestionarios de Estilos de Aprendizaje | Test de Grasha</h2>
+          <h2 class="pt-2" v-if="userInfo.type == 'Tutor'">
+            Cuestionario de Estilos de Enseñanza | Test de Grasha
+          </h2>
+          <h2 class="pt-2" v-else>
+            Cuestionarios de Estilos de Aprendizaje | Test de Grasha
+          </h2>
         </v-card-title>
         <v-card-text>
           <v-row>
@@ -94,16 +98,20 @@
           </v-row>
 
           <v-row>
-            <v-col cols="12" sm="12" md="12" v-if="userInfo.type=='Tutor'">
+            <v-col cols="12" sm="12" md="12" v-if="userInfo.type == 'Tutor'">
               <h6>Cuestionarios de Estilos de Enseñanza - Tutores</h6>
               <p>
-                Este test te permite identificar tu enfoque y metodología al enseñar, ofreciéndote detalles para potenciar tus habilidades y adaptarte a las necesidades de tus estudiantes.
+                Este test te permite identificar tu enfoque y metodología al enseñar,
+                ofreciéndote detalles para potenciar tus habilidades y adaptarte a las
+                necesidades de tus estudiantes.
               </p>
             </v-col>
             <v-col cols="12" sm="12" md="12" v-else>
               <h6>Cuestionarios de Estilos de Aprendizaje - Estudiantes</h6>
               <p>
-                Este test te guía hacia la comprensión de cómo procesas y asimilas información, brindándote herramientas para maximizar tu aprendizaje y disfrutar del proceso.
+                Este test te guía hacia la comprensión de cómo procesas y asimilas
+                información, brindándote herramientas para maximizar tu aprendizaje y
+                disfrutar del proceso.
               </p>
             </v-col>
           </v-row>
@@ -111,6 +119,25 @@
       </v-card>
 
       <v-divider></v-divider>
+
+      <template>
+        <v-row justify="center">
+          <v-dialog v-model="userExistsDialog" persistent max-width="290">
+            <v-card>
+              <v-card-text class="text-center"
+                >¿Quieres continuar con el Cuestionario</v-card-text
+              >
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="red darken-1" text @click="continueUser(false)"> No </v-btn>
+                <v-btn color="green darken-1" text @click="continueUser(true)">
+                  Sí
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-row>
+      </template>
 
       <Question :user="user" v-if="user"></Question>
     </v-container>
@@ -164,7 +191,8 @@ export default {
       // this.userInfo.name = this.userInfo.name.toUpperCase();
       const errors = [];
       if (!this.$v.userInfo.name.$dirty) return errors;
-      !this.$v.userInfo.name.required && errors.push("Se requiere el Nombre y Apellido. Ejemplo: Carlos Pérez");
+      !this.$v.userInfo.name.required &&
+        errors.push("Se requiere el Nombre y Apellido. Ejemplo: Carlos Pérez");
       return errors;
     },
     userEmailErrors() {
@@ -204,17 +232,49 @@ export default {
         email: "",
         age: "",
         sex: "",
+        existingUser: false,
       },
       useInfoDisabled: false,
       submitUserInfoLoading: false,
       baseURL: "/survey",
       user: null,
+      userExistsDialog: false,
+      existingUser: null,
     };
   },
 
   methods: {
     uppercase() {
       this.userInfo.name = this.userInfo.name.toUpperCase();
+    },
+
+    continueUser(continueUser) {
+      this.userExistsDialog = false;
+      this.useInfoDisabled = true;
+
+
+      if (continueUser) {
+        this.user = this.existingUser;
+        this.user.type = this.userInfo.type.toLowerCase();
+        this.user.existingUser = true;
+
+        return;
+      }
+
+      axios
+        .post(this.baseURL + "/remove-user-responses", {
+          user_id: this.existingUser.id,
+        })
+        .then((response) => {
+          console.log(response);
+
+          this.user = response.data.data.user;
+          this.user.type = this.userInfo.type.toLowerCase();
+        })
+        .catch((error) => {
+          console.log(error);
+          this.showStatus(error.response.data.message, "error");
+        });
     },
 
     submitUserInfo() {
@@ -236,17 +296,24 @@ export default {
         .then((response) => {
           console.log(response);
 
+          let userExists = response.data.data.userExists;
+
           this.submitUserInfoLoading = false;
 
-          this.user = response.data.data.user;
+          if (userExists) {
+            this.userExistsDialog = true;
+            this.existingUser = response.data.data.user;
+            return;
+          }
 
+          this.user = response.data.data.user;
           this.user.type = this.userInfo.type.toLowerCase();
+
+          this.useInfoDisabled = true;
 
           console.log("user", this.user);
 
           this.showStatus(response.data.message, "success");
-
-          this.useInfoDisabled = true;
         })
         .catch((error) => {
           console.log(error);

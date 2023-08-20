@@ -35,10 +35,26 @@ class SurveyController extends Controller
         $request->validate([
             "type" => "required|in:student,tutor",
             "name" => "required",
-            "email" => "required|email|unique:users,email",
+            "email" => "required|email",
             "age"=>"required",
             "sex"=>"required",
         ]);
+
+        $user=User::where("email",$request->email)->first();
+
+
+
+        if($user && $user->responses()->count()>0){
+
+            return response([
+                "message" => "¿Quieres continuar con el Cuestionario",
+                "data" => [
+                    "userExists" => true,
+                    "user" => $user,
+                ]
+            ], 200);
+
+        }
 
         $user = User::updateOrCreate([
             "email" => $request->email
@@ -58,6 +74,30 @@ class SurveyController extends Controller
                 "user" => $user,
             ]
         ], 200);
+    }
+
+
+    public function removeUserResponses(Request $request){
+
+        $request->validate([
+            "user_id"=>"required|exists:users,id",
+        ]);
+
+        UserResponse::where("user_id",$request->user_id)->delete();
+
+        $user=User::find($request->user_id);
+
+        $user->is_survey_completed=0;
+
+        $user->save();
+
+        return response([
+            "data" => [
+                "user" => $user,
+            ]
+        ], 200);
+
+
     }
 
     public function getLearningStyle($user_id){
@@ -112,18 +152,48 @@ class SurveyController extends Controller
             "limit" => "required|integer",
             "type" => "required|in:student,tutor",
             "user_id" => "required|exists:users,id",
+            "existing_user" => "nullable",
         ]);
 
-        $type = $request->type;
 
-        $questions =$this->getQuestions($request->user_id,$type,$request->offset,$request->limit);
+        $type = $request->type;
+        $offset=$request->offset;
+        $limit=$request->limit;
+        $user_id=$request->user_id;
+        $progress=0;
+
+
+        if($request->existing_user=="true"){
+            // get user responded questions count
+
+            $userResponses=UserResponse::where("user_id",$user_id)->count();
+
+
+            $offset=$userResponses;
+
+            $progress=$this->calculateProgress($user_id,$request->type);
+
+        }
+
+        Log::info("questions",[
+            "offset" => $offset,
+            "limit" => $limit,
+            "type" => $type,
+            "progress" => $progress,
+        ]);
+
+        $questions =$this->getQuestions($user_id,$type,$offset,$limit);
 
 
         return response([
             "message" => "Questions fetched successfully",
             "data" => [
                 "questions" => $questions,
+                "progress" => $progress,
+                "offset" => intval($offset),
+                "limit" => intval($limit),
             ]
+
         ], 200);
     }
 

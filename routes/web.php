@@ -38,6 +38,9 @@ Route::prefix("survey")->middleware(["check.locale"])->name("survey.")->group(fu
     Route::get("{type}", [SurveyController::class, "index"])->name("index");
     Route::post("submit-user-info", [SurveyController::class, "submitUserInfo"])->name("submit-user-info");
 
+    Route::post("remove-user-responses", [SurveyController::class, "removeUserResponses"])->name("remove-user-responses");
+
+
 
     Route::post("submit-answers", [SurveyController::class, "submitAnswers"])->name("submit-answers");
 });

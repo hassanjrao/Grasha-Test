@@ -163,10 +163,15 @@ export default {
             limit: this.limit,
             user_id: this.user.id,
             type: this.user.type,
+            existing_user: this.user.existingUser,
           },
         })
         .then((response) => {
           this.questions = response.data.data.questions;
+          this.progress = response.data.data.progress;
+          this.offset = response.data.data.offset;
+            this.limit = response.data.data.limit;
+
 
           console.log("Questions", this.questions);
         })
