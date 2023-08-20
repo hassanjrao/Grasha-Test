@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\avel\grasha\LearningStyleRecommendedTechniqueSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
             QuestionSeeder::class,
             QuestionTutorSeeder::class,
             LearningStyleCharacteristicSeeder::class,
+            LearningStyleRecommendedTechniqueSeeder::class,
         ]);
     }
 }
