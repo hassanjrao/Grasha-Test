@@ -35,6 +35,8 @@ return [
     "confirm_password"=>"Confirmar contraseña",
     "already_have_an_account"=>"¿Ya tienes una cuenta? Iniciar sesión",
     "dont_have_an_account"=>"¿No tienes una cuenta? Regístrate",
+    "actions"=>"Comportamiento",
+    "delete"=>"Eliminar",
 ];
 
 ?>

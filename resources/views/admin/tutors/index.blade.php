@@ -44,6 +44,8 @@
 
                                 <th>{{ __("admin.created_at") }}</th>
 
+                                <th>{{ __("admin.actions") }}</th>
+
 
                             </tr>
 
@@ -77,6 +79,17 @@
                                     @endforeach
 
                                     <td>{{ $tutor->created_at }}</td>
+
+                                    <td>
+                                        <form id="form-{{ $tutor->id }}"
+                                            action="{{ route('admin.tutors.destroy', $tutor->id) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input type="button" onclick="confirmDelete({{ $tutor->id }})"
+                                                class="btn btn-sm btn-alt-danger" value="{{ __("admin.delete") }}">
+
+                                        </form>
+                                    </td>
 
                                 </tr>
                             @endforeach

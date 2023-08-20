@@ -35,6 +35,8 @@ return [
     "confirm_password"=>"Confirm Password",
     "already_have_an_account"=>"Already have an account? Login",
     "dont_have_an_account"=>"Don't have an account? Register",
+    "actions"=>"Actions",
+    "delete"=>"Delete",
 ];
 
 

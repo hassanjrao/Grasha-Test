@@ -91,6 +91,11 @@ class AdminStudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user=User::findorfail($id);
+
+        $user->delete();
+
+        return redirect()->back()->with("success","Borrado exitosamente");
+
     }
 }
