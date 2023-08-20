@@ -31,7 +31,7 @@
                                 <!-- Sign In Form -->
                                 <!-- jQuery Validation (.js-validation-signin class is initialized in js/pages/op_auth_signin.min.js which was auto compiled from _js/pages/op_auth_signin.js) -->
                                 <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                                <form class="js-validation-signin" action="{{ route('login') }}" method="POST">
+                                <form id="form2" class="js-validation-signin" action="{{ route('login') }}" method="POST">
                                     @csrf
                                     <div class="py-3">
                                         <div class="mb-4">
@@ -104,4 +104,35 @@
         </div>
     </div>
     <!-- END Page Content -->
+@endsection
+
+@section("js_after")
+
+<script>
+    $('#form2 input[type=email]').on('change invalid', function() {
+    var textfield = $(this).get(0);
+
+    // 'setCustomValidity not only sets the message, but also marks
+    // the field as invalid. In order to see whether the field really is
+    // invalid, we have to remove the message first
+    textfield.setCustomValidity('');
+
+    if (!textfield.validity.valid) {
+      textfield.setCustomValidity('Debe ser una dirección de correo electrónico válida');
+    }
+});
+$('#form2 input[type=password]').on('change invalid', function() {
+    var textfield = $(this).get(0);
+
+    // 'setCustomValidity not only sets the message, but also marks
+    // the field as invalid. In order to see whether the field really is
+    // invalid, we have to remove the message first
+    textfield.setCustomValidity('');
+
+    if (!textfield.validity.valid) {
+      textfield.setCustomValidity('Por favor, introduzca su contraseña');
+    }
+});
+</script>
+
 @endsection

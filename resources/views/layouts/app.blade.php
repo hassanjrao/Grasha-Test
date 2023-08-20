@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title>{{ config("app.name") }}</title>
+    <title>{{ config('app.name') }}</title>
 
-    <meta name="description" content="{{ config("app.name") }}">
+    <meta name="description" content="{{ config('app.name') }}">
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
 
@@ -106,6 +106,47 @@
 
     <!-- Laravel Scaffolding JS -->
     <!-- <script src="{{ asset('/js/laravel.app.js') }}"></script> -->
+    <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
+
+    <script>
+        $('#form2 input[type=email]').on('change invalid', function() {
+            var textfield = $(this).get(0);
+
+            // 'setCustomValidity not only sets the message, but also marks
+            // the field as invalid. In order to see whether the field really is
+            // invalid, we have to remove the message first
+            textfield.setCustomValidity('');
+
+            if (!textfield.validity.valid) {
+                textfield.setCustomValidity('Debe ser una dirección de correo electrónico válida');
+            }
+        });
+        $('#form2 input[type=password]').on('change invalid', function() {
+            var textfield = $(this).get(0);
+
+            // 'setCustomValidity not only sets the message, but also marks
+            // the field as invalid. In order to see whether the field really is
+            // invalid, we have to remove the message first
+            textfield.setCustomValidity('');
+
+            if (!textfield.validity.valid) {
+                textfield.setCustomValidity('Por favor, introduzca su contraseña');
+            }
+        });
+
+        $('#form2 input[type=text]').on('change invalid', function() {
+            var textfield = $(this).get(0);
+
+            // 'setCustomValidity not only sets the message, but also marks
+            // the field as invalid. In order to see whether the field really is
+            // invalid, we have to remove the message first
+            textfield.setCustomValidity('');
+
+            if (!textfield.validity.valid) {
+                textfield.setCustomValidity('Por favor rellene este campo.');
+            }
+        });
+    </script>
 
     @yield('js_after')
 </body>
