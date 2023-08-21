@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Auth::routes(['reset' => false, 'verify' => false]);
+Auth::routes(['reset' => false, 'verify' => true]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware(["check.locale"]);
 
@@ -47,7 +47,7 @@ Route::prefix("survey")->middleware(["check.locale"])->name("survey.")->group(fu
 
 
 
-Route::middleware(["auth","check.locale"])->group(function () {
+Route::middleware(["auth","check.locale","verified"])->group(function () {
 
     Route::prefix("admin")->name("admin.")->group(function(){
         Route::get("",[AdminDashboardController::class,"index"])->name("dashboard.index");

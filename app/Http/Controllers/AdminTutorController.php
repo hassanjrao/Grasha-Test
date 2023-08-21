@@ -89,6 +89,10 @@ class AdminTutorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tutor=User::findOrFail($id);
+
+        $tutor->delete();
+
+        return redirect()->back()->with("success","Deleted Successfully");
     }
 }
