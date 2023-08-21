@@ -47,7 +47,7 @@ Route::prefix("survey")->middleware(["check.locale"])->name("survey.")->group(fu
 
 
 
-Route::middleware(["auth","check.locale","verified"])->group(function () {
+Route::middleware(["auth","check.locale"])->group(function () {
 
     Route::prefix("admin")->name("admin.")->group(function(){
         Route::get("",[AdminDashboardController::class,"index"])->name("dashboard.index");
