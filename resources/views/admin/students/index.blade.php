@@ -31,6 +31,8 @@
                     <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
                         <thead>
                             <tr>
+                                <th>{{ __("admin.action") }}</th>
+
                                 <th>{{ __("admin.index") }}</th>
                                 <th>{{ __("admin.name") }}</th>
                                 <th>{{ __("admin.email") }}</th>
@@ -43,7 +45,6 @@
 
                                 <th>{{ __("admin.created_at") }}</th>
 
-                                <th>{{ __("admin.actions") }}</th>
 
                             </tr>
 
@@ -57,6 +58,17 @@
 
 
                                 <tr>
+
+                                    <td>
+                                        <form id="form-{{ $student->id }}"
+                                            action="{{ route('admin.students.destroy', $student->id) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input type="button" onclick="confirmDelete({{ $student->id }})"
+                                                class="btn btn-sm btn-alt-danger" value="{{ __("admin.delete") }}">
+
+                                        </form>
+                                    </td>
 
                                     <td>{{ $ind + 1 }}</td>
 
@@ -78,16 +90,6 @@
 
                                     <td>{{ $student->created_at }}</td>
 
-                                    <td>
-                                        <form id="form-{{ $student->id }}"
-                                            action="{{ route('admin.students.destroy', $student->id) }}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <input type="button" onclick="confirmDelete({{ $student->id }})"
-                                                class="btn btn-sm btn-alt-danger" value="{{ __("admin.delete") }}">
-
-                                        </form>
-                                    </td>
 
                                 </tr>
                             @endforeach

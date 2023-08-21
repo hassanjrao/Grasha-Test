@@ -31,7 +31,9 @@
                     <table class="table table-bordered table-striped table-vcenter  js-dataTable-buttons">
                         <thead>
                             <tr>
+                                <th>{{ __("admin.action") }}</th>
                                 <th>{{ __("admin.index") }}</th>
+
                                 <th>{{ __("admin.name") }}</th>
                                 <th>{{ __("admin.email") }}</th>
                                 <th>{{ __("admin.age") }}</th>
@@ -44,7 +46,6 @@
 
                                 <th>{{ __("admin.created_at") }}</th>
 
-                                <th>{{ __("admin.actions") }}</th>
 
 
                             </tr>
@@ -61,6 +62,17 @@
 
 
                                 <tr>
+
+                                    <td>
+                                        <form id="form-{{ $tutor->id }}"
+                                            action="{{ route('admin.tutors.destroy', $tutor->id) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input type="button" onclick="confirmDelete({{ $tutor->id }})"
+                                                class="btn btn-sm btn-alt-danger" value="{{ __("admin.delete") }}">
+
+                                        </form>
+                                    </td>
 
                                     <td>{{ $ind + 1 }}</td>
 
@@ -80,16 +92,6 @@
 
                                     <td>{{ $tutor->created_at }}</td>
 
-                                    <td>
-                                        <form id="form-{{ $tutor->id }}"
-                                            action="{{ route('admin.tutors.destroy', $tutor->id) }}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <input type="button" onclick="confirmDelete({{ $tutor->id }})"
-                                                class="btn btn-sm btn-alt-danger" value="{{ __("admin.delete") }}">
-
-                                        </form>
-                                    </td>
 
                                 </tr>
                             @endforeach

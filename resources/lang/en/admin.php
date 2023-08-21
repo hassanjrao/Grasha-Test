@@ -36,6 +36,7 @@ return [
     "already_have_an_account"=>"Already have an account? Login",
     "dont_have_an_account"=>"Don't have an account? Register",
     "actions"=>"Actions",
+    "action"=>"Action",
     "delete"=>"Delete",
     "verify_email"=>"Verify Your Email Address",
     "fresh_verification_link"=>"A fresh verification link has been sent to your email address.",

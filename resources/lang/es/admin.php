@@ -36,6 +36,7 @@ return [
     "already_have_an_account"=>"¿Ya tienes una cuenta? Iniciar sesión",
     "dont_have_an_account"=>"¿No tienes una cuenta? Regístrate",
     "actions"=>"Comportamiento",
+    "action"=>"Acción",
     "delete"=>"Eliminar",
     "verify_email"=>"Verifica tu dirección de correo electrónico",
     "fresh_verification_link"=>"Se ha enviado un nuevo enlace de verificación a su dirección de correo electrónico.",
