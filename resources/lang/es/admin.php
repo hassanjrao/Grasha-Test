@@ -37,6 +37,11 @@ return [
     "dont_have_an_account"=>"¿No tienes una cuenta? Regístrate",
     "actions"=>"Comportamiento",
     "delete"=>"Eliminar",
+    "verify_email"=>"Verifica tu dirección de correo electrónico",
+    "fresh_verification_link"=>"Se ha enviado un nuevo enlace de verificación a su dirección de correo electrónico.",
+    "before_proceeding"=>"Antes de continuar, consulte su correo electrónico para obtener un enlace de verificación.",
+    "email_not_received"=>"Si no recibiste el correo electrónico",
+    "click_here_to_request_another"=>"haga clic aquí para solicitar otro",
 ];
 
 ?>
