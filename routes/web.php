@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['reset' => false, 'verify' => true]);
+Auth::routes(['reset' => false, 'verify' => true,"register"=>"false"]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware(["check.locale"]);
 
@@ -44,9 +44,15 @@ Route::middleware(["auth","check.locale"])->group(function () {
 
     Route::prefix("admin")->name("admin.")->group(function(){
 
+        Route::resource("admin/profile",AdminProfileController::class)->only(["index","update"]);
+
+    });
+
+
+    Route::prefix("admin")->name("admin.")->middleware(["check.is_password_changed"])->group(function(){
+
         Route::get("",[AdminDashboardController::class,"index"])->name("dashboard.index");
 
-        Route::resource("profile",AdminProfileController::class)->only(["index","update"]);
 
         Route::resource("tutors",AdminTutorController::class)->only(["index","destroy"]);
         Route::resource("students",AdminStudentController::class)->only(["index","destroy"]);

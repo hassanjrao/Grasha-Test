@@ -75,7 +75,7 @@ class AdminProfileController extends Controller
         $request->validate([
             "name"=>"required",
             "email"=>"required|email|unique:users,email,".$id ,
-            "email"=>"regex:/^[a-zA-Z0-9_.+-]+@ayudinga.org$/i"
+            // "email"=>"regex:/^[a-zA-Z0-9_.+-]+@ayudinga.org$/i"
         ]);
 
         $user=User::findOrFail($id);
@@ -91,13 +91,16 @@ class AdminProfileController extends Controller
             }
 
             $user->update([
-                "password"=>bcrypt($request->password)
+                "password"=>bcrypt($request->password),
+                "is_password_changed"=>true
             ]);
         }
 
         $user->update([
             "name"=>$request->name,
             "email"=>$request->email,
+            "position"=>$request->position,
+
         ]);
 
 

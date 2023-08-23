@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             QuestionTutorSeeder::class,
             LearningStyleCharacteristicSeeder::class,
             LearningStyleRecommendedTechniqueSeeder::class,
+            AdminSeeder::class
         ]);
     }
 }

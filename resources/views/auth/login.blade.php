@@ -81,14 +81,14 @@
                                 </form>
                                 <!-- END Sign In Form -->
 
-                                <div class="row mb-4">
+                                {{-- <div class="row mb-4">
                                     <div class="col-md-12 col-xl-12 text-center">
                                         <a href="{{ route('register') }}">
                                             <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i>
                                             {{ __('admin.dont_have_an_account') }}
                                         </a>
                                     </div>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>

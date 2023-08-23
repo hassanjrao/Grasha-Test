@@ -25,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'age',
         'sex',
         "position",
+        'is_password_changed'
     ];
 
     /**

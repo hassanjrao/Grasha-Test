@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         "check.locale"=>\App\Http\Middleware\CheckLocale::class,
         "set_default_lang"=>\App\Http\Middleware\SetDefaultLang::class,
+        "check.is_password_changed"=>\App\Http\Middleware\CheckIsPaswordChanged::class,
 
     ];
 }
