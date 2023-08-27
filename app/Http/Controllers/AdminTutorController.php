@@ -111,6 +111,6 @@ class AdminTutorController extends Controller
         User::whereIn("id",$ids)->delete();
 
 
-        return response()->json(["success"=>"Deleted Successfully"]);
+        return response()->json(["success"=>"Eliminado Exitosamente"]);
     }
 }
