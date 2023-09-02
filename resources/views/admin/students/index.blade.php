@@ -38,7 +38,7 @@
                                 <th>{{ __('admin.email') }}</th>
                                 <th>{{ __('admin.age') }}</th>
                                 <th>{{ __('admin.sex') }}</th>
-                                <th>{{ __('admin.teaching_style') }}</th>
+                                <th>{{ __('admin.learning_style') }}</th>
                                 @foreach ($questions as $ind => $question)
                                     <th>{{ __('admin.question') }} {{ ++$ind }}</th>
                                 @endforeach
