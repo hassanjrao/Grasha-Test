@@ -17,7 +17,6 @@ class AdminDashboardController extends Controller
     public function index(){
 
 
-        $this->test();
 
         $tutors=User::role('tutor')->where("is_survey_completed",1)->count();
         $students=User::role('student')->where("is_survey_completed",1)->count();

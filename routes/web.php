@@ -55,6 +55,8 @@ Route::middleware(["auth","check.locale"])->group(function () {
 
         Route::get("",[AdminDashboardController::class,"index"])->name("dashboard.index");
 
+        Route::get("test",[AdminDashboardController::class,"test"])->name("dashboard.test");
+
 
         Route::resource("tutors",AdminTutorController::class)->only(["index","destroy"]);
         Route::resource("students",AdminStudentController::class)->only(["index","destroy"]);
