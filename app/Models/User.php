@@ -268,7 +268,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 
-
         $totalexpertResponses = $responses->filter(function ($response) {
             return $response->question->learning_style_id == 7;
         })

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\StudentCluster;
+use App\Models\TeachingStylePreference;
 use App\Models\TutorCluster;
 use App\Models\User;
 use App\Models\UserResponse;
@@ -16,7 +17,7 @@ class AdminDashboardController extends Controller
     public function index(){
 
 
-        $this->makeGroups();
+        $this->test();
 
         $tutors=User::role('tutor')->where("is_survey_completed",1)->count();
         $students=User::role('student')->where("is_survey_completed",1)->count();
@@ -27,11 +28,84 @@ class AdminDashboardController extends Controller
 
     public function test(){
 
+        $students=User::role('student')->get();
+        $tutors=User::role('tutor')->get();
+
+        $teachingStylePreferences=TeachingStylePreference::all();
+
+        $groups=[];
+
+        $tutorsGroup=[];
+
+
+        foreach($tutors as $tutor){
+
+
+            $learningStyle = $tutor->userLearningStyle()["learning_style"];
+
+            if($learningStyle){
+            $tutorsGroup[$learningStyle->id][]=[
+                "name"=>$tutor->name,
+                "tutor_id"=>$tutor->id,
+                "learning_style_id"=>$learningStyle->id,
+                "learning_style_name"=>$learningStyle->style_en
+            ];}
+
+        }
+
+
+        foreach($students as $student){
+
+            $learningStyle = $student->userLearningStyle()["learning_style"];
+
+            dump($learningStyle,$student->id);
+
+            if($learningStyle){
+
+            $preferedTeachingStyles = $teachingStylePreferences->where("learning_style_id", $learningStyle->id)->pluck("teaching_style_id")->toArray();
+
+
+            foreach($preferedTeachingStyles as $preferedTeachingStyle){
+
+                if(isset($tutorsGroup[$preferedTeachingStyle])){
+                    $tutor=$tutorsGroup[$preferedTeachingStyle][0];
+
+
+                    $groups[$tutor["tutor_id"]][]=[
+                        "student_id"=>$student->id,
+                        "student_name"=>$student->name,
+                        "learning_style_id"=>$learningStyle->id,
+                        "learning_style_name"=>$learningStyle->style_en,
+                        "tutor_id"=>$tutor["tutor_id"],
+                        "tutor_name"=>$tutor["name"],
+                        "tutor_learning_style_id"=>$tutor["learning_style_id"],
+                        "tutor_learning_style_name"=>$tutor["learning_style_name"],
+                    ];
+
+                    break;
+                }
+
+
+            }
+        }
+
+            // dd($tutorsGroup[$learningStyle->id])
+
+
+
+
+        }
+
+        dd($groups);
+
+
+        dd($tutorsGroup);
+
+
+
     }
 
     public function makeGroups(){
-        $students=User::role('student')->get();
-        $tutors=User::role('tutor')->get();
 
 
 

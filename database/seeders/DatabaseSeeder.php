@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             ClusterSeeder::class,
             TutorClusterSeeder::class,
             StudentClusterSeeder::class,
+            TeachingStylePreferenceSeeder::class,
         ]);
     }
 }
