@@ -27,8 +27,8 @@ class AdminDashboardController extends Controller
 
     public function test(){
 
-        $students=User::role('student')->get();
-        $tutors=User::role('tutor')->get();
+        $students=User::role('student')->where("is_survey_completed",1)->get();
+        $tutors=User::role('tutor')->where("is_survey_completed",1)->get();
 
         $teachingStylePreferences=TeachingStylePreference::all();
 
