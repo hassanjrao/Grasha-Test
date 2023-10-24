@@ -57,7 +57,6 @@ class AdminDashboardController extends Controller
 
             $learningStyle = $student->userLearningStyle()["learning_style"];
 
-            dump($learningStyle,$student->id);
 
             if($learningStyle){
 
