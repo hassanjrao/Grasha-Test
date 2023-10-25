@@ -57,7 +57,7 @@
 
 
                             @php
-                                $learningStyle = $tutor->userLearningStyle();
+                                $learningStyle = $tutor->userLearningStyle('tutor');
                             @endphp
 
 

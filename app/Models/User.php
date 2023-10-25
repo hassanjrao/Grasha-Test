@@ -396,9 +396,9 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
-    public function userLearningStyle()
+    public function userLearningStyle($userRole='students')
     {
-        $userRole = $this->roles()->first()->name;
+
 
         if ($userRole == "student") {
             return $this->calculateLearningStyleStudent();

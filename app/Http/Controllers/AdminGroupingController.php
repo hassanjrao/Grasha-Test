@@ -37,7 +37,7 @@ class AdminGroupingController extends Controller
         foreach ($tutors as $tutor) {
 
 
-            $learningStyle = $tutor->userLearningStyle()["learning_style"];
+            $learningStyle = $tutor->userLearningStyle('tutor')["learning_style"];
 
             if ($learningStyle) {
                 $tutorsGroup[$learningStyle->id][] = [
