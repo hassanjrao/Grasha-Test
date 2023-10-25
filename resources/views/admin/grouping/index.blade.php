@@ -58,19 +58,20 @@
 
         <div class="col-sm-4 ">
 
-               <form method="GET" action="{{ route('admin.grouping.index') }}">
+            <form method="GET" action="{{ route('admin.grouping.index') }}">
 
-                    <div class="input-group">
-                        @php
-                            $totalStudents = 5;
-                            if($total_students){
-                                $totalStudents = $total_students;
-                            }
-                        @endphp
-                        <input type="number" min="1" value="{{ $totalStudents }}" class="form-control" name="total_students" required >
-                        <button type="submit" class="btn btn-primary">Generate</button>
-                      </div>
-               </form>
+                <div class="input-group">
+                    @php
+                    $totalStudents = 5;
+                    if($total_students){
+                    $totalStudents = $total_students;
+                    }
+                    @endphp
+                    <input type="number" min="1" value="{{ $totalStudents }}" class="form-control" name="total_students"
+                        required>
+                    <button type="button" onclick="submit(this)" class="btn btn-primary">Generate</button>
+                </div>
+            </form>
 
 
         </div>
@@ -120,7 +121,8 @@
                             <td>{{ $student['student_name'] }}</td>
                             @endforeach
 
-                            @if(count($group['students']) <$totalStudents) @for ($i=1; $i<=$totalStudents-count($group['students']); $i++) <td>
+                            @if(count($group['students']) <$totalStudents) @for ($i=1;
+                                $i<=$totalStudents-count($group['students']); $i++) <td>
                                 </td>
 
                                 @endfor
@@ -156,100 +158,16 @@
 
 @section('js_after')
 
-<script src="{{ asset('js/pages/tables_datatables_students.js') }}"></script>
+<script src="{{ asset('js/pages/tables_datatables_group.js') }}"></script>
 
 <script>
-    // function confirmAllDelete(type) {
-        //     Swal.fire({
-        //         title: '¿Estás seguro',
-        //         text: "Deseas eliminar los datos",
-        //         icon: 'warning',
-        //         showCancelButton: true,
-        //         cancelButtonColor: '#198754',
-        //         confirmButtonColor: '#d33',
-        //         cancelButtonText: 'Cancelar',
-        //         confirmButtonText: '¡Sí, bórralo!',
-        //         reverseButtons: true,
-        //         focusCancel: true,
-
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             // fire ask for password alert
-        //             askForPassword(type)
-
-        //         }
-        //     })
-        // }
-
-        // // ask for password alert
-        // function askForPassword(type) {
-        //     Swal.fire({
-        //         title: 'Ingresa tu contraseña de administrador.',
-        //         input: 'password',
-        //         inputAttributes: {
-        //             autocapitalize: 'off'
-        //         },
-        //         showCancelButton: true,
-        //         confirmButtonText: 'Confirmar',
-        //         confirmButtonColor: '#d33',
-        //         showLoaderOnConfirm: true,
-        //         cancelButtonColor: '#198754',
-        //         confirmButtonColor: '#d33',
-        //         cancelButtonText: 'Cancelar',
-        //         inputValidator: (value) => {
-        //             if (!value) {
-        //                 return 'Debes ingresar tu contraseña.'
-        //             }
-        //         },
-        //         preConfirm: (password) => {
-        //             return fetch(`/admin/dashboard/delete-all`, {
-        //                     method: 'POST',
-        //                     headers: {
-        //                         'Content-Type': 'application/json',
-        //                         'Accept': 'application/json',
-        //                         'X-Requested-With': 'XMLHttpRequest',
-        //                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-        //                             .getAttribute('content')
-        //                     },
-        //                     body: JSON.stringify({
-        //                         password: password,
-        //                         type: type
-        //                     })
-        //                 })
-        //                 .then(response => {
-        //                     console.log(response)
-        //                     if (!response.ok) {
-        //                         throw new Error('Contraseña incorrecta.')
-        //                     }
-        //                     return response.json()
-        //                 })
-        //                 .catch(error => {
-        //                     console.log("error", error)
-        //                     Swal.showValidationMessage(
-
-        //                         `Solicitud fallida: ${error}`
-        //                     )
-        //                 })
-        //         },
-        //         allowOutsideClick: () => !Swal.isLoading()
-        //     }).then((result) => {
-        //         console.log("last", result)
-        //         if (result.isConfirmed) {
-        //             // success alert
-        //             Swal.fire({
-        //                 icon: 'success',
-        //                 title: '¡Eliminado!',
-        //                 text: 'Los registros han sido eliminados.',
-        //                 showConfirmButton: false,
-        //                 timer: 1500
-        //             }).then((result) => {
-        //                 if (result.dismiss === Swal.DismissReason.timer) {
-        //                     window.location.reload()
-        //                 }
-        //             })
-        //         }
-        //     })
-        // }
+    function submit(e){
+        e.disabled = true;
+        // change text of button
+        e.innerText = 'Generating...';
+        
+        e.form.submit();
+}
 </script>
 
 
