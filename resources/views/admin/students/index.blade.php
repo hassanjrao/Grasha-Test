@@ -55,12 +55,13 @@
                         @php
 
                         $questions = \App\Models\Question::where("type", "student")->get();
+                        $learningStyles = \App\Models\LearningStyle::all();
 
 
                         @endphp
                         @foreach ($students as $ind => $student)
                         @php
-                        $learningStyle = $student->userLearningStyle('student',$questions);
+                        $learningStyle = $student->userLearningStyle('student',$questions,$learningStyles);
                         @endphp
 
 

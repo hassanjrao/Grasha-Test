@@ -57,6 +57,7 @@
                             @php
 
         $questions =  \App\Models\Question::where("type", "tutor")->get();
+        $learningStyles = \App\Models\LearningStyle::all();
 
                             @endphp
 
@@ -64,7 +65,7 @@
 
 
                             @php
-                                $learningStyle = $tutor->userLearningStyle('tutor',$questions);
+                                $learningStyle = $tutor->userLearningStyle('tutor',$questions,$learningStyles);
                             @endphp
 
 
