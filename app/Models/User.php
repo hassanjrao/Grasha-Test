@@ -236,7 +236,7 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    public function calculateLearningStyleTutor($questions)
+    public function calculateLearningStyleTutor($questions,$learningStyles)
     {
 
 
@@ -348,7 +348,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 
-        $learningStyle = LearningStyle::find($learningStyleId);
+        // $learningStyle = LearningStyle::find($learningStyleId);
+
+        $learningStyle = $learningStyles->where("id", $learningStyleId)->first();
 
         if ($learningStyle) {
             $learningStyle->info = $learningStyle->info;
@@ -394,16 +396,16 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
-    public function userLearningStyle($userRole='students',$questions)
+    public function userLearningStyle($userRole='students',$questions,$learningStyles)
     {
 
 
         if ($userRole == "student") {
 
-            return $this->calculateLearningStyleStudent($questions);
+            return $this->calculateLearningStyleStudent($questions,$learningStyles);
         } else {
 
-            return $this->calculateLearningStyleTutor($questions);
+            return $this->calculateLearningStyleTutor($questions,$learningStyles);
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LearningStyle;
 use App\Models\Question;
 use App\Models\TeachingStylePreference;
 use App\Models\User;
@@ -36,12 +37,13 @@ class AdminGroupingController extends Controller
 
 
         $questions = Question::where("type", "tutor")->get();
+        $learningStyles=LearningStyle::all();
 
 
         foreach ($tutors as $tutor) {
 
 
-            $learningStyle = $tutor->userLearningStyle('tutor',$questions)["learning_style"];
+            $learningStyle = $tutor->userLearningStyle('tutor',$questions,$learningStyles)["learning_style"];
 
             if ($learningStyle) {
                 $tutorsGroup[$learningStyle->id][] = [
@@ -60,7 +62,7 @@ class AdminGroupingController extends Controller
 
         foreach ($students as $student) {
 
-            $learningStyle = $student->userLearningStyle('student',$questions)["learning_style"];
+            $learningStyle = $student->userLearningStyle('student',$questions,$learningStyles)["learning_style"];
 
 
             if ($learningStyle) {
