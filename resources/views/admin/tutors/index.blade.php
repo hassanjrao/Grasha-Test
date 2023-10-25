@@ -53,11 +53,18 @@
                         </thead>
 
                         <tbody>
+
+                            @php
+
+        $questions = Question::where("type", "tutor")->get();
+
+                            @endphp
+
                             @foreach ($tutors as $ind => $tutor)
 
 
                             @php
-                                $learningStyle = $tutor->userLearningStyle('tutor');
+                                $learningStyle = $tutor->userLearningStyle('tutor',$questions);
                             @endphp
 
 
