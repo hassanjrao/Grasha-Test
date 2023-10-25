@@ -69,7 +69,7 @@
                     @endphp
                     <input type="number" min="1" value="{{ $totalStudents }}" class="form-control" name="total_students"
                         required>
-                    <button type="button" onclick="submit(this)" class="btn btn-primary">Generate</button>
+                    <button type="button" onclick="generate(this)" class="btn btn-primary">Generate</button>
                 </div>
             </form>
 
@@ -161,7 +161,8 @@
 <script src="{{ asset('js/pages/tables_datatables_group.js') }}"></script>
 
 <script>
-    function submit(e){
+    function generate(e){
+
         e.disabled = true;
         // change text of button
         e.innerText = 'Generating...';
