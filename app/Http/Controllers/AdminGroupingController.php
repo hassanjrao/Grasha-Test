@@ -18,15 +18,14 @@ class AdminGroupingController extends Controller
         $groups = $this->makeGroups();
 
         return view("admin.grouping.index", compact("groups"));
-
     }
 
 
     public function makeGroups()
     {
 
-        $students = User::role('student')->where("is_survey_completed", 1)->get();
-        $tutors = User::role('tutor')->where("is_survey_completed", 1)->get();
+        $students = User::role('student')->where("is_survey_completed", 1)->take(10)->get();
+        $tutors = User::role('tutor')->where("is_survey_completed", 1)->take(10)->get();
 
         $teachingStylePreferences = TeachingStylePreference::all();
 
