@@ -43,6 +43,8 @@ return [
     "before_proceeding"=>"Antes de continuar, consulte su correo electrónico para obtener un enlace de verificación.",
     "email_not_received"=>"Si no recibiste el correo electrónico",
     "click_here_to_request_another"=>"haga clic aquí para solicitar otro",
+    "tutor_name"=>"Nombre del tutor",
+    "student"=>"Estudiante",
 ];
 
 ?>

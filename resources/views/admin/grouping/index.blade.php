@@ -1,0 +1,190 @@
+@extends('layouts.backend')
+@section('page-title', __('admin.grouping'))
+@section('css_before')
+<!-- Page JS Plugins CSS -->
+
+@endsection
+
+
+
+@section('content')
+<!-- Page Content -->
+<div class="content">
+
+
+    <div class="block block-rounded">
+        <div class="block-header block-header-default">
+            <h3 class="block-title">
+                {{ __('admin.grouping') }}
+            </h3>
+
+
+
+            {{-- <a href="{{ route('admin.students.create') }}" class="btn btn-primary">Add</a> --}}
+
+        </div>
+
+        <div class="block-content block-content-full">
+            <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/tables_datatables.js -->
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
+                    <thead>
+                        <tr>
+                            <th>{{ '#' }}</th>
+                            <th>{{ __('admin.tutor_name') }}</th>
+
+                            @for ($i=1; $i<=5; $i++) <th>{{ __('admin.student')." ".$i }}</th>
+
+                                @endfor
+
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach ($groups as $ind=> $group)
+
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $group['tutor_name'] }}</td>
+
+                            @foreach ($group['students'] as $student)
+                            <td>{{ $student['student_name'] }}</td>
+                            @endforeach
+
+                            @if(count($group['students']) <5) @for ($i=1; $i<=5-count($group['students']); $i++) <td></td>
+
+                                @endfor
+                                @endif
+
+                        </tr>
+
+                        @endforeach
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+<!-- END Page Content -->
+@endsection
+
+@section('js_after')
+
+<script src="{{ asset('js/pages/tables_datatables_students.js') }}"></script>
+
+<script>
+    // function confirmAllDelete(type) {
+        //     Swal.fire({
+        //         title: '¿Estás seguro',
+        //         text: "Deseas eliminar los datos",
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         cancelButtonColor: '#198754',
+        //         confirmButtonColor: '#d33',
+        //         cancelButtonText: 'Cancelar',
+        //         confirmButtonText: '¡Sí, bórralo!',
+        //         reverseButtons: true,
+        //         focusCancel: true,
+
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             // fire ask for password alert
+        //             askForPassword(type)
+
+        //         }
+        //     })
+        // }
+
+        // // ask for password alert
+        // function askForPassword(type) {
+        //     Swal.fire({
+        //         title: 'Ingresa tu contraseña de administrador.',
+        //         input: 'password',
+        //         inputAttributes: {
+        //             autocapitalize: 'off'
+        //         },
+        //         showCancelButton: true,
+        //         confirmButtonText: 'Confirmar',
+        //         confirmButtonColor: '#d33',
+        //         showLoaderOnConfirm: true,
+        //         cancelButtonColor: '#198754',
+        //         confirmButtonColor: '#d33',
+        //         cancelButtonText: 'Cancelar',
+        //         inputValidator: (value) => {
+        //             if (!value) {
+        //                 return 'Debes ingresar tu contraseña.'
+        //             }
+        //         },
+        //         preConfirm: (password) => {
+        //             return fetch(`/admin/dashboard/delete-all`, {
+        //                     method: 'POST',
+        //                     headers: {
+        //                         'Content-Type': 'application/json',
+        //                         'Accept': 'application/json',
+        //                         'X-Requested-With': 'XMLHttpRequest',
+        //                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+        //                             .getAttribute('content')
+        //                     },
+        //                     body: JSON.stringify({
+        //                         password: password,
+        //                         type: type
+        //                     })
+        //                 })
+        //                 .then(response => {
+        //                     console.log(response)
+        //                     if (!response.ok) {
+        //                         throw new Error('Contraseña incorrecta.')
+        //                     }
+        //                     return response.json()
+        //                 })
+        //                 .catch(error => {
+        //                     console.log("error", error)
+        //                     Swal.showValidationMessage(
+
+        //                         `Solicitud fallida: ${error}`
+        //                     )
+        //                 })
+        //         },
+        //         allowOutsideClick: () => !Swal.isLoading()
+        //     }).then((result) => {
+        //         console.log("last", result)
+        //         if (result.isConfirmed) {
+        //             // success alert
+        //             Swal.fire({
+        //                 icon: 'success',
+        //                 title: '¡Eliminado!',
+        //                 text: 'Los registros han sido eliminados.',
+        //                 showConfirmButton: false,
+        //                 timer: 1500
+        //             }).then((result) => {
+        //                 if (result.dismiss === Swal.DismissReason.timer) {
+        //                     window.location.reload()
+        //                 }
+        //             })
+        //         }
+        //     })
+        // }
+</script>
+
+
+@endsection
