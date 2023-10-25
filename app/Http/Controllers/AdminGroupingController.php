@@ -27,8 +27,8 @@ class AdminGroupingController extends Controller
     public function makeGroups()
     {
 
-        $students = User::role('student')->where("is_survey_completed", 1)->take(10)->get();
-        $tutors = User::role('tutor')->where("is_survey_completed", 1)->take(10)->get();
+        $students = User::role('student')->where("is_survey_completed", 1)->get();
+        $tutors = User::role('tutor')->where("is_survey_completed", 1)->get();
 
         $teachingStylePreferences = TeachingStylePreference::all();
 
