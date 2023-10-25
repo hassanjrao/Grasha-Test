@@ -54,7 +54,7 @@
 
                         @php
 
-                        $questions = Question::where("type", "student")->get();
+                        $questions = \App\Models\Question::where("type", "student")->get();
 
 
                         @endphp
