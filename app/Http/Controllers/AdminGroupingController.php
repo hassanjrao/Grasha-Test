@@ -37,7 +37,7 @@ class AdminGroupingController extends Controller
 
 
         $questions = Question::where("type", "tutor")->get();
-        $learningStyles=LearningStyle::with(["recommendedTechniques"])->get();
+        $learningStyles=LearningStyle::with(["recommendedTechniques","characteristics"])->get();
 
 
         foreach ($tutors as $tutor) {

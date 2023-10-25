@@ -55,7 +55,7 @@
                         @php
 
                         $questions = \App\Models\Question::where("type", "student")->get();
-                        $learningStyles = \App\Models\LearningStyle::all();
+                        $learningStyles = \App\Models\LearningStyle::with(["recommendedTechniques"])->get();
 
 
                         @endphp
