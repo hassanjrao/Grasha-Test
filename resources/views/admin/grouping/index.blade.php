@@ -62,9 +62,12 @@
 
                     <div class="input-group">
                         @php
-                            $value = 5;
+                            $totalStudents = 5;
+                            if(isset($_GET['total_students'])){
+                                $totalStudents = $_GET['total_students'];
+                            }
                         @endphp
-                        <input type="number" min="1" value="{{ $value }}" class="form-control" name="total_students" required >
+                        <input type="number" min="1" value="{{ $totalStudents }}" class="form-control" name="total_students" required >
                         <button type="submit" class="btn btn-primary">Generate</button>
                       </div>
                </form>
@@ -96,7 +99,7 @@
                             <th>{{ '#' }}</th>
                             <th>{{ __('admin.tutor_name') }}</th>
 
-                            @for ($i=1; $i<=5; $i++) <th>{{ __('admin.student')." ".$i }}</th>
+                            @for ($i=1; $i<=$totalStudents; $i++) <th>{{ __('admin.student')." ".$i }}</th>
 
                                 @endfor
 
@@ -117,7 +120,7 @@
                             <td>{{ $student['student_name'] }}</td>
                             @endforeach
 
-                            @if(count($group['students']) <5) @for ($i=1; $i<=5-count($group['students']); $i++) <td>
+                            @if(count($group['students']) <$totalStudents) @for ($i=1; $i<=5-count($group['students']); $i++) <td>
                                 </td>
 
                                 @endfor
