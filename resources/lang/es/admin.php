@@ -46,6 +46,7 @@ return [
     "tutor_name"=>"Nombre del tutor",
     "student"=>"Estudiante",
     'grouping'=>'Grupos',
+    'group_number'=>'Número de grupo',
 ];
 
 ?>

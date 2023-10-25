@@ -97,7 +97,7 @@
                 <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
                     <thead>
                         <tr>
-                            <th>{{ '#' }}</th>
+                            <th>{{ __('admin.group_number') }}</th>
                             <th>{{ __('admin.tutor_name') }}</th>
 
                             @for ($i=1; $i<=$totalStudents; $i++) <th>{{ __('admin.student')." ".$i }}</th>
@@ -114,7 +114,7 @@
                         @foreach ($groups as $ind=> $group)
 
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ __('admin.group_number') }} #{{ $loop->iteration }}</td>
                             <td>{{ $group['tutor_name'] }}</td>
 
                             @foreach ($group['students'] as $student)
@@ -165,7 +165,7 @@
         e.disabled = true;
         // change text of button
         e.innerText = 'Generating...';
-        
+
         e.form.submit();
 }
 </script>
