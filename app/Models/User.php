@@ -52,6 +52,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(UserResponse::class, "user_id");
     }
 
+    public function responsesQuestion()
+    {
+        return $this->hasMany(UserResponse::class, "user_id")->whereHas("question");
+    }
+
     public function learningStyles()
     {
         $userRole = $this->roles()->first()->name;
@@ -61,7 +66,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $learningStyles;
     }
 
-    public function calculateLearningStyleStudent($questions)
+    public function calculateLearningStyleStudent($questions,$learningStyles,$userResponses)
     {
 
 
@@ -89,8 +94,9 @@ class User extends Authenticatable implements MustVerifyEmail
         })->count();
 
 
-        $responses = $this->responses()->whereHas("question")->with("question")->get();
+        // $responses = $this->responses()->whereHas("question")->with("question")->get();
 
+        $responses=$userResponses;
 
         $totalIndependentResponses = $responses->filter(function ($response) {
             return $response->question->learning_style_id == 1;
@@ -188,7 +194,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 
-        $learningStyle = LearningStyle::find($learningStyleId);
+        $learningStyle = $learningStyles->where("id", $learningStyleId)->first();
 
         if ($learningStyle) {
             $learningStyle->info = $learningStyle->info;
@@ -236,7 +242,7 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    public function calculateLearningStyleTutor($questions,$learningStyles)
+    public function calculateLearningStyleTutor($questions,$learningStyles,$userResponses)
     {
 
 
@@ -262,8 +268,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 
-        $responses = $this->responses()->whereHas("question")->with("question")->get();
+        // $responses = $this->responses->whereHas("question")->with("question")->get();
 
+        $responses=$userResponses;
 
 
         $totalexpertResponses = $responses->filter(function ($response) {
@@ -396,16 +403,21 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
-    public function userLearningStyle($userRole='students',$questions,$learningStyles)
+    public function userLearningStyle($userRole='students',$questions,$learningStyles,$userResponses)
     {
 
 
         if ($userRole == "student") {
 
-            return $this->calculateLearningStyleStudent($questions,$learningStyles);
+            // filter userResponse by user_id
+            $userResponses = $userResponses->where("user_id", $this->id);
+
+            return $this->calculateLearningStyleStudent($questions,$learningStyles,$userResponses);
         } else {
 
-            return $this->calculateLearningStyleTutor($questions,$learningStyles);
+            // filter userResponse by user_id
+            $userResponses = $userResponses->where("user_id", $this->id);
+            return $this->calculateLearningStyleTutor($questions,$learningStyles,$userResponses);
         }
     }
 }

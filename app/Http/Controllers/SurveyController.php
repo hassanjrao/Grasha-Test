@@ -241,7 +241,9 @@ class SurveyController extends Controller
             $user=User::find($user_id);
             $questions=Question::where("type",$request->type)->get();
             $learningStyles=LearningStyle::all();
-            $userLearningStyle=$user->userLearningStyle($request->type,$questions,$learningStyles)["learning_style"];
+            $userResponses=UserResponse::whereHas("question")->with('question')->get();
+
+            $userLearningStyle=$user->userLearningStyle($request->type,$questions,$learningStyles,$userResponses)["learning_style"];
             $user->is_survey_completed=1;
             $user->save();
 

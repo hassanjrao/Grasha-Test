@@ -56,12 +56,13 @@
 
                         $questions = \App\Models\Question::where("type", "student")->get();
                         $learningStyles = \App\Models\LearningStyle::with(["recommendedTechniques"])->get();
+                        $userResponses=\App\Models\UserResponse::whereHas("question")->with('question')->get();
 
 
                         @endphp
                         @foreach ($students as $ind => $student)
                         @php
-                        $learningStyle = $student->userLearningStyle('student',$questions,$learningStyles);
+                        $learningStyle = $student->userLearningStyle('student',$questions,$learningStyles,$userResponses);
                         @endphp
 
 

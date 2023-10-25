@@ -6,6 +6,7 @@ use App\Models\LearningStyle;
 use App\Models\Question;
 use App\Models\TeachingStylePreference;
 use App\Models\User;
+use App\Models\UserResponse;
 use Illuminate\Http\Request;
 
 class AdminGroupingController extends Controller
@@ -39,11 +40,12 @@ class AdminGroupingController extends Controller
         $questions = Question::where("type", "tutor")->get();
         $learningStyles=LearningStyle::with(["recommendedTechniques","characteristics"])->get();
 
+        $userResponses=UserResponse::whereHas("question")->with('question')->get();
 
         foreach ($tutors as $tutor) {
 
 
-            $learningStyle = $tutor->userLearningStyle('tutor',$questions,$learningStyles)["learning_style"];
+            $learningStyle = $tutor->userLearningStyle('tutor',$questions,$learningStyles,$userResponses)["learning_style"];
 
             if ($learningStyle) {
                 $tutorsGroup[$learningStyle->id][] = [
@@ -62,7 +64,7 @@ class AdminGroupingController extends Controller
 
         foreach ($students as $student) {
 
-            $learningStyle = $student->userLearningStyle('student',$questions,$learningStyles)["learning_style"];
+            $learningStyle = $student->userLearningStyle('student',$questions,$learningStyles,$userResponses)["learning_style"];
 
 
             if ($learningStyle) {
