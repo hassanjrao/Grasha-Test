@@ -120,7 +120,7 @@
                             <td>{{ $student['student_name'] }}</td>
                             @endforeach
 
-                            @if(count($group['students']) <$totalStudents) @for ($i=1; $i<=5-count($group['students']); $i++) <td>
+                            @if(count($group['students']) <$totalStudents) @for ($i=1; $i<=$totalStudents-count($group['students']); $i++) <td>
                                 </td>
 
                                 @endfor
