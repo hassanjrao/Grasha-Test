@@ -114,7 +114,7 @@
                         @foreach ($groups as $ind=> $group)
 
                         <tr>
-                            <td>{{ __('admin.group_number') }} #{{ $loop->iteration }}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $group['tutor_name'] }}</td>
 
                             @foreach ($group['students'] as $student)
