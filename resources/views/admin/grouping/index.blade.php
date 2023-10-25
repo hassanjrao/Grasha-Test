@@ -63,8 +63,8 @@
                     <div class="input-group">
                         @php
                             $totalStudents = 5;
-                            if(isset($_GET['total_students'])){
-                                $totalStudents = $_GET['total_students'];
+                            if($total_students){
+                                $totalStudents = $total_students;
                             }
                         @endphp
                         <input type="number" min="1" value="{{ $totalStudents }}" class="form-control" name="total_students" required >

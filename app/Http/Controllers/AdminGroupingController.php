@@ -20,6 +20,8 @@ class AdminGroupingController extends Controller
     {
         $groups = [];
 
+        $total_students=null;
+
         if($request->total_students){
 
             $total_students=$request->total_students;
@@ -36,7 +38,7 @@ class AdminGroupingController extends Controller
         $students = User::role('student')->where("is_survey_completed", 1)->count();
 
 
-        return view("admin.grouping.index", compact("groups", "tutors", "students"));
+        return view("admin.grouping.index", compact("groups", "tutors", "students",'total_students'));
     }
 
 
