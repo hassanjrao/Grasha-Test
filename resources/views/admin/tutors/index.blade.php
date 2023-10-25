@@ -57,7 +57,7 @@
                             @php
 
         $questions =  \App\Models\Question::where("type", "tutor")->get();
-        $learningStyles = \App\Models\LearningStyle::with(["recommendedTechniques"])->get();
+        $learningStyles = \App\Models\LearningStyle::with(["recommendedTechniques","characteristics"])->get();
         $userResponses=\App\Models\UserResponse::whereHas("question")->with('question')->get();
 
 

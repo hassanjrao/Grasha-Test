@@ -240,7 +240,7 @@ class SurveyController extends Controller
         if($questions->count()==0){
             $user=User::find($user_id);
             $questions=Question::where("type",$request->type)->get();
-            $learningStyles=LearningStyle::all();
+            $learningStyles = LearningStyle::with(["recommendedTechniques","characteristics"])->get();
             $userResponses=UserResponse::whereHas("question")->with('question')->get();
 
             $userLearningStyle=$user->userLearningStyle($request->type,$questions,$learningStyles,$userResponses)["learning_style"];
