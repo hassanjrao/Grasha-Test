@@ -61,11 +61,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $learningStyles;
     }
 
-    public function calculateLearningStyleStudent()
+    public function calculateLearningStyleStudent($questions)
     {
 
 
-        $questions = Question::where("type", "student")->get();
 
 
         $independentStyleQuestions = $questions->filter(function ($question) {
@@ -237,11 +236,10 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    public function calculateLearningStyleTutor()
+    public function calculateLearningStyleTutor($questions)
     {
 
 
-        $questions = Question::where("type", "tutor")->get();
 
 
         $expertStyleQuestions = $questions->filter(function ($question) {
@@ -396,14 +394,16 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
-    public function userLearningStyle($userRole='students')
+    public function userLearningStyle($userRole='students',$questions)
     {
 
 
         if ($userRole == "student") {
-            return $this->calculateLearningStyleStudent();
+
+            return $this->calculateLearningStyleStudent($questions);
         } else {
-            return $this->calculateLearningStyleTutor();
+
+            return $this->calculateLearningStyleTutor($questions);
         }
     }
 }
