@@ -19,8 +19,11 @@ class AdminGroupingController extends Controller
     public function index()
     {
         $groups = $this->makeGroups();
+        $tutors = User::role('tutor')->where("is_survey_completed", 1)->count();
+        $students = User::role('student')->where("is_survey_completed", 1)->count();
 
-        return view("admin.grouping.index", compact("groups"));
+
+        return view("admin.grouping.index", compact("groups", "tutors", "students"));
     }
 
 
@@ -38,14 +41,14 @@ class AdminGroupingController extends Controller
 
 
         $questions = Question::where("type", "tutor")->get();
-        $learningStyles=LearningStyle::with(["recommendedTechniques","characteristics"])->get();
+        $learningStyles = LearningStyle::with(["recommendedTechniques", "characteristics"])->get();
 
-        $userResponses=UserResponse::whereHas("question")->with('question')->get();
+        $userResponses = UserResponse::whereHas("question")->with('question')->get();
 
         foreach ($tutors as $tutor) {
 
 
-            $learningStyle = $tutor->userLearningStyle('tutor',$questions,$learningStyles,$userResponses)["learning_style"];
+            $learningStyle = $tutor->userLearningStyle('tutor', $questions, $learningStyles, $userResponses)["learning_style"];
 
             if ($learningStyle) {
                 $tutorsGroup[$learningStyle->id][] = [
@@ -59,12 +62,13 @@ class AdminGroupingController extends Controller
 
 
 
+
         $questions = Question::where("type", "student")->get();
 
 
         foreach ($students as $student) {
 
-            $learningStyle = $student->userLearningStyle('student',$questions,$learningStyles,$userResponses)["learning_style"];
+            $learningStyle = $student->userLearningStyle('student', $questions, $learningStyles, $userResponses)["learning_style"];
 
 
             if ($learningStyle) {
@@ -107,6 +111,22 @@ class AdminGroupingController extends Controller
                         break;
                     }
                 }
+            }
+        }
+
+        // add those tutors who don't have any students
+
+        foreach ($tutors as $tutor) {
+
+            if (!isset($groups[$tutor->id])) {
+
+
+                $groups[$tutor->id]['tutor_id'] = $tutor->id;
+                $groups[$tutor->id]['tutor_name'] = $tutor->name;
+                $groups[$tutor->id]['tutor_learning_style_id'] = $learningStyle->id;
+                $groups[$tutor->id]['tutor_learning_style_name'] = $learningStyle->style_en;
+                $groups[$tutor->id]['students'] = [];
+
             }
         }
 

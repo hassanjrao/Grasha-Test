@@ -11,6 +11,49 @@
 <!-- Page Content -->
 <div class="content">
 
+    <div class="row row-deck">
+
+        <div class="col-sm-6 col-xxl-6 col-md-6">
+            <!-- New Customers -->
+            <div class="block block-rounded d-flex flex-column">
+
+                <div
+                    class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <dl class="mb-0">
+                        <dt class="fs-3 fw-bold">{{ __('admin.tutors') }}</dt>
+                    </dl>
+                    <div class="item item-rounded-lg bg-body-light">
+                        {{ $tutors }}
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-sm-6 col-xxl-6 col-md-6">
+            <!-- New Customers -->
+            <div class="block block-rounded d-flex flex-column">
+
+                <div
+                    class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <dl class="mb-0">
+                        <dt class="fs-3 fw-bold">{{ __('admin.students') }}</dt>
+                    </dl>
+                    <div class="item item-rounded-lg bg-body-light">
+                        {{ $students }}
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 
     <div class="block block-rounded">
         <div class="block-header block-header-default">
