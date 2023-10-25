@@ -16,9 +16,22 @@ class AdminGroupingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $groups = $this->makeGroups();
+        $groups = [];
+
+        if($request->total_students){
+
+            $total_students=$request->total_students;
+
+            if($total_students<1){
+                $total_students=5;
+            }
+
+            $groups = $this->makeGroups($request->total_students);
+        }
+
+
         $tutors = User::role('tutor')->where("is_survey_completed", 1)->count();
         $students = User::role('student')->where("is_survey_completed", 1)->count();
 
@@ -27,7 +40,7 @@ class AdminGroupingController extends Controller
     }
 
 
-    public function makeGroups()
+    public function makeGroups($total_students)
     {
 
         $students = User::role('student')->where("is_survey_completed", 1)->get();
@@ -85,7 +98,7 @@ class AdminGroupingController extends Controller
 
                             $tutor = $tutorGroup;
 
-                            if (isset($groups[$tutor["tutor_id"]]) && count($groups[$tutor["tutor_id"]]['students']) >= 5) {
+                            if (isset($groups[$tutor["tutor_id"]]) && count($groups[$tutor["tutor_id"]]['students']) >= $total_students) {
 
                                 continue;
                             }

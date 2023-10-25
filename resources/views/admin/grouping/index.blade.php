@@ -54,6 +54,25 @@
 
     </div>
 
+    <div class="row row-deck mb-4 justify-content-center">
+
+        <div class="col-sm-4 ">
+
+               <form method="GET" action="{{ route('admin.grouping.index') }}">
+
+                    <div class="input-group">
+                        @php
+                            $value = 5;
+                        @endphp
+                        <input type="number" min="1" value="{{ $value }}" class="form-control" name="total_students" required >
+                        <button type="submit" class="btn btn-primary">Generate</button>
+                      </div>
+               </form>
+
+
+        </div>
+    </div>
+
 
     <div class="block block-rounded">
         <div class="block-header block-header-default">
@@ -98,7 +117,8 @@
                             <td>{{ $student['student_name'] }}</td>
                             @endforeach
 
-                            @if(count($group['students']) <5) @for ($i=1; $i<=5-count($group['students']); $i++) <td></td>
+                            @if(count($group['students']) <5) @for ($i=1; $i<=5-count($group['students']); $i++) <td>
+                                </td>
 
                                 @endfor
                                 @endif
