@@ -19,7 +19,7 @@ class AdminGroupingController extends Controller
     public function index(Request $request)
     {
         $groups = [];
-
+        $studentsWithoutGroup = [];
         $total_students=null;
 
         if($request->total_students){
@@ -30,7 +30,8 @@ class AdminGroupingController extends Controller
                 $total_students=5;
             }
 
-            $groups = $this->makeGroups($request->total_students);
+            $groups = $this->makeGroups($request->total_students)['groups'];
+            $studentsWithoutGroup = $this->makeGroups($request->total_students)['students_without_group'];
         }
 
 
@@ -38,7 +39,7 @@ class AdminGroupingController extends Controller
         $students = User::role('student')->where("is_survey_completed", 1)->count();
 
 
-        return view("admin.grouping.index", compact("groups", "tutors", "students",'total_students'));
+        return view("admin.grouping.index", compact("groups", "tutors", "students",'total_students','studentsWithoutGroup'));
     }
 
 
@@ -54,6 +55,7 @@ class AdminGroupingController extends Controller
 
         $tutorsGroup = [];
 
+        $studentsWithoutGroup = [];
 
         $questions = Question::where("type", "tutor")->get();
         $learningStyles = LearningStyle::with(["recommendedTechniques", "characteristics"])->get();
@@ -85,6 +87,7 @@ class AdminGroupingController extends Controller
 
             $learningStyle = $student->userLearningStyle('student', $questions, $learningStyles, $userResponses)["learning_style"];
 
+            $gotGroup = false;
 
             if ($learningStyle) {
 
@@ -121,11 +124,23 @@ class AdminGroupingController extends Controller
                                 "tutor_id" => $tutor["tutor_id"],
                                 "tutor_name" => $tutor["name"],
                             ];
+
+                            $gotGroup = true;
                             break;
                         }
                         break;
                     }
                 }
+            }
+
+            if (!$gotGroup) {
+
+                $studentsWithoutGroup[] = [
+                    "student_id" => $student->id,
+                    "student_name" => $student->name,
+                    "learning_style_id" => $learningStyle->id,
+                    "learning_style_name" => $learningStyle->style_en,
+                ];
             }
         }
 
@@ -145,7 +160,18 @@ class AdminGroupingController extends Controller
             }
         }
 
-        return $groups;
+        // students without group
+
+
+        // add those students who don't have any tutor in the groups array
+
+
+
+
+        return [
+            "groups" => $groups,
+            "students_without_group" => $studentsWithoutGroup
+        ];
     }
 
 

@@ -47,6 +47,12 @@ return [
     "student"=>"Estudiante",
     'grouping'=>'Grupos',
     'group_number'=>'Número de grupo',
+    'generate_group'=>'Generar Grupos',
+    'students_per_group'=>'Estudiantes por grupo',
+    'generating'=>'Generando',
+    'students_without_group'=>'Nombre de Estudiantes sin grupo',
+    'number_of_students_without_group'=>'Número de estudiantes sin grupo',
+    'percentage_of_students_without_group'=>'Porcentaje de estudiantes sin grupo',
 ];
 
 ?>

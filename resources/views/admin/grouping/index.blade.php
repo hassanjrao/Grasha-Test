@@ -60,6 +60,8 @@
 
             <form method="GET" action="{{ route('admin.grouping.index') }}">
 
+
+                <label for="total_students">{{ __('admin.students_per_group') }}</label>
                 <div class="input-group">
                     @php
                     $totalStudents = 5;
@@ -67,9 +69,11 @@
                     $totalStudents = $total_students;
                     }
                     @endphp
-                    <input type="number" min="1" value="{{ $totalStudents }}" class="form-control" name="total_students"
-                        required>
-                    <button type="button" onclick="generate(this)" class="btn btn-primary">Generate</button>
+
+                    <input type="number" min="1" id="total_students" value="{{ $totalStudents }}" class="form-control"
+                        name="total_students" required>
+                    <button type="button" onclick="generate(this)" class="btn btn-primary">{{ __('admin.generate_group')
+                        }}</button>
                 </div>
             </form>
 
@@ -83,9 +87,6 @@
             <h3 class="block-title">
                 {{ __('admin.grouping') }}
             </h3>
-
-
-
             {{-- <a href="{{ route('admin.students.create') }}" class="btn btn-primary">Add</a> --}}
 
         </div>
@@ -115,10 +116,10 @@
 
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $group['tutor_name'] }}</td>
+                            <td>{{ ucwords($group['tutor_name']) }}</td>
 
                             @foreach ($group['students'] as $student)
-                            <td>{{ $student['student_name'] }}</td>
+                            <td>{{ ucwords($student['student_name']) }}</td>
                             @endforeach
 
                             @if(count($group['students']) <$totalStudents) @for ($i=1;
@@ -143,6 +144,49 @@
 
     </div>
 
+
+    <div class="row row-deck mb-4 justify-content-center">
+
+        <div class="block block-rounded">
+
+            <div class="block-content pb-4">
+                <div class="col-sm-12 d-flex">
+
+                    <h5>{{ __('admin.students_without_group') }} : </h5>
+
+                    <div>
+                        @foreach ($studentsWithoutGroup as $student)
+                        <span>{{ ucwords($student['student_name']) }} ({{ ucwords($student['learning_style_name']) }},
+                        </span>
+                        @endforeach
+
+                    </div>
+                </div>
+
+                <div class="col-sm-12 d-flex justify-content-between">
+
+                    <div>
+                        <h5>{{ __('admin.number_of_students_without_group') }} : {{ count($studentsWithoutGroup) }}</h5>
+                    </div>
+
+                    <div>
+                        <h5>{{ __('admin.percentage_of_students_without_group') }} : {{
+                            (count($studentsWithoutGroup)/$students)*100 }}%
+                        </h5>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
 </div>
 
 
@@ -165,7 +209,7 @@
 
         e.disabled = true;
         // change text of button
-        e.innerText = 'Generating...';
+        e.innerText = "{{ __('admin.generating') }}"+'...';
 
         e.form.submit();
 }
