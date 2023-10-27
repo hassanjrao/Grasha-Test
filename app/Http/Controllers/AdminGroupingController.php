@@ -20,6 +20,7 @@ class AdminGroupingController extends Controller
     {
         $groups = [];
         $studentsWithoutGroup = [];
+        $tutorsWithoutGroup = [];
         $total_students=null;
 
         if($request->total_students){
@@ -30,8 +31,11 @@ class AdminGroupingController extends Controller
                 $total_students=5;
             }
 
-            $groups = $this->makeGroups($request->total_students)['groups'];
-            $studentsWithoutGroup = $this->makeGroups($request->total_students)['students_without_group'];
+            $allGroups = $this->makeGroups($request->total_students);
+            $groups = $allGroups['groups'];
+            $studentsWithoutGroup = $allGroups['students_without_group'];
+            $tutorsWithoutGroup = $allGroups['tutors_without_group'];
+
         }
 
 
@@ -39,7 +43,7 @@ class AdminGroupingController extends Controller
         $students = User::role('student')->where("is_survey_completed", 1)->count();
 
 
-        return view("admin.grouping.index", compact("groups", "tutors", "students",'total_students','studentsWithoutGroup'));
+        return view("admin.grouping.index", compact("groups", "tutors", "students",'total_students','studentsWithoutGroup','tutorsWithoutGroup'));
     }
 
 
@@ -56,6 +60,7 @@ class AdminGroupingController extends Controller
         $tutorsGroup = [];
 
         $studentsWithoutGroup = [];
+        $tutorsWithoutGroup = [];
 
         $questions = Question::where("type", "tutor")->get();
         $learningStyles = LearningStyle::with(["recommendedTechniques", "characteristics"])->get();
@@ -151,11 +156,12 @@ class AdminGroupingController extends Controller
             if (!isset($groups[$tutor->id])) {
 
 
-                $groups[$tutor->id]['tutor_id'] = $tutor->id;
-                $groups[$tutor->id]['tutor_name'] = $tutor->name;
-                $groups[$tutor->id]['tutor_learning_style_id'] = $learningStyle->id;
-                $groups[$tutor->id]['tutor_learning_style_name'] = $learningStyle->style_en;
-                $groups[$tutor->id]['students'] = [];
+                $tutorsWithoutGroup[]= [
+                    "tutor_id" => $tutor->id,
+                    "tutor_name" => $tutor->name,
+                    "learning_style_id" => $tutor->learning_style_id,
+                    "learning_style_name" => $tutor->learning_style_name,
+                ];
 
             }
         }
@@ -170,7 +176,8 @@ class AdminGroupingController extends Controller
 
         return [
             "groups" => $groups,
-            "students_without_group" => $studentsWithoutGroup
+            "students_without_group" => $studentsWithoutGroup,
+            "tutors_without_group" => $tutorsWithoutGroup,
         ];
     }
 

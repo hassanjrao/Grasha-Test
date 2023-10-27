@@ -53,6 +53,9 @@ return [
     'students_without_group'=>'Nombre de Estudiantes sin grupo',
     'number_of_students_without_group'=>'Número de estudiantes sin grupo',
     'percentage_of_students_without_group'=>'Porcentaje de estudiantes sin grupo',
+'tutors_without_group'=>'Tutores sin grupo',
+'number_of_tutors_without_group'=>'Número de tutores sin grupo',
+'percentage_of_tutors_without_group'=>'Porcentaje de tutores sin grupo',
 ];
 
 ?>

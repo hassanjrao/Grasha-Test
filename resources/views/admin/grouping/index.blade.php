@@ -184,6 +184,44 @@
 
 
 
+    <div class="row row-deck mb-4 justify-content-center">
+
+        <div class="block block-rounded">
+
+            <div class="block-content pb-4">
+                <div class="col-sm-12 d-flex mb-4 justify-content-between ">
+
+                    <h5  style="margin-right: 30px !important">{{ __('admin.tutors_without_group') }} : </h5>
+
+                    <div>
+                        @foreach ($tutorsWithoutGroup as $tutor)
+                        <span>{{ ucwords($tutor['tutor_name']) }} ({{ ucwords($tutor['learning_style_name']) }}),
+                        </span>
+                        @endforeach
+
+                    </div>
+                </div>
+
+                <div class="col-sm-12 d-flex justify-content-between ">
+
+                    <div>
+                        <h5>{{ __('admin.number_of_tutors_without_group') }} : {{ count($tutorsWithoutGroup) }}</h5>
+                    </div>
+
+                    <div>
+                        <h5>{{ __('admin.percentage_of_tutors_without_group') }} : {{
+                            round((count($tutorsWithoutGroup)/$tutors)*100,2) }}%
+                        </h5>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
 
 
 
