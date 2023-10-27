@@ -150,7 +150,7 @@
         <div class="block block-rounded">
 
             <div class="block-content pb-4">
-                <div class="col-sm-12 d-flex mb-4">
+                <div class="col-sm-12 d-flex mb-4 justify-content-between ">
 
                     <h5  class="mr-4">{{ __('admin.students_without_group') }} : </h5>
 
