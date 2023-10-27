@@ -171,7 +171,7 @@
 
                     <div>
                         <h5>{{ __('admin.percentage_of_students_without_group') }} : {{
-                            (count($studentsWithoutGroup)/$students)*100 }}%
+                            round((count($studentsWithoutGroup)/$students)*100,2) }}%
                         </h5>
                     </div>
                 </div>
