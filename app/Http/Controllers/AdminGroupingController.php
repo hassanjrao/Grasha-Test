@@ -21,21 +21,20 @@ class AdminGroupingController extends Controller
         $groups = [];
         $studentsWithoutGroup = [];
         $tutorsWithoutGroup = [];
-        $total_students=null;
+        $total_students = null;
 
-        if($request->total_students){
+        if ($request->total_students) {
 
-            $total_students=$request->total_students;
+            $total_students = $request->total_students;
 
-            if($total_students<1){
-                $total_students=5;
+            if ($total_students < 1) {
+                $total_students = 5;
             }
 
             $allGroups = $this->makeGroups($request->total_students);
             $groups = $allGroups['groups'];
             $studentsWithoutGroup = $allGroups['students_without_group'];
             $tutorsWithoutGroup = $allGroups['tutors_without_group'];
-
         }
 
 
@@ -43,7 +42,7 @@ class AdminGroupingController extends Controller
         $students = User::role('student')->where("is_survey_completed", 1)->count();
 
 
-        return view("admin.grouping.index", compact("groups", "tutors", "students",'total_students','studentsWithoutGroup','tutorsWithoutGroup'));
+        return view("admin.grouping.index", compact("groups", "tutors", "students", 'total_students', 'studentsWithoutGroup', 'tutorsWithoutGroup'));
     }
 
 
@@ -58,6 +57,7 @@ class AdminGroupingController extends Controller
         $groups = [];
 
         $tutorsGroup = [];
+        $tutorLearningStyles = [];
 
         $studentsWithoutGroup = [];
         $tutorsWithoutGroup = [];
@@ -76,6 +76,11 @@ class AdminGroupingController extends Controller
                 $tutorsGroup[$learningStyle->id][] = [
                     "name" => $tutor->name,
                     "tutor_id" => $tutor->id,
+                    "learning_style_id" => $learningStyle->id,
+                    "learning_style_name" => $learningStyle->style_en
+                ];
+
+                $tutorLearningStyles[$tutor->id] = [
                     "learning_style_id" => $learningStyle->id,
                     "learning_style_name" => $learningStyle->style_en
                 ];
@@ -155,18 +160,21 @@ class AdminGroupingController extends Controller
 
             if (!isset($groups[$tutor->id])) {
 
+                if (isset($tutorLearningStyles[$tutor->id])) {
 
-                $tutorsWithoutGroup[]= [
-                    "tutor_id" => $tutor->id,
-                    "tutor_name" => $tutor->name,
-                    "learning_style_id" => $tutor->learning_style_id,
-                    "learning_style_name" => $tutor->learning_style_name,
-                ];
+                    $learningStyle=$tutorLearningStyles[$tutor->id];
 
+                    $tutorsWithoutGroup[] = [
+                        "tutor_id" => $tutor->id,
+                        "tutor_name" => $tutor->name,
+                        "learning_style_id" => $learningStyle["learning_style_id"],
+                        "learning_style_name" => $learningStyle["learning_style_name"],
+                    ];
+                }
             }
         }
 
-        dd($tutorsWithoutGroup);
+
         // students without group
 
 
