@@ -166,6 +166,7 @@ class AdminGroupingController extends Controller
             }
         }
 
+        dd($tutorsWithoutGroup);
         // students without group
 
 
