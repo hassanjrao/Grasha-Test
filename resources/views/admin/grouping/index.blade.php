@@ -152,9 +152,9 @@
             <div class="block-content pb-4">
                 <div class="col-sm-12 d-flex mb-4">
 
-                    <h5>{{ __('admin.students_without_group') }} : </h5>
+                    <h5  class="mr-4">{{ __('admin.students_without_group') }} : </h5>
 
-                    <div class="ml-4">
+                    <div>
                         @foreach ($studentsWithoutGroup as $student)
                         <span>{{ ucwords($student['student_name']) }} ({{ ucwords($student['learning_style_name']) }}),
                         </span>
