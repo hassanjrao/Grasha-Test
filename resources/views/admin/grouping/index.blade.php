@@ -150,20 +150,20 @@
         <div class="block block-rounded">
 
             <div class="block-content pb-4">
-                <div class="col-sm-12 d-flex">
+                <div class="col-sm-12 d-flex mb-4">
 
                     <h5>{{ __('admin.students_without_group') }} : </h5>
 
-                    <div>
+                    <div class="ml-4">
                         @foreach ($studentsWithoutGroup as $student)
-                        <span>{{ ucwords($student['student_name']) }} ({{ ucwords($student['learning_style_name']) }},
+                        <span>{{ ucwords($student['student_name']) }} ({{ ucwords($student['learning_style_name']) }}),
                         </span>
                         @endforeach
 
                     </div>
                 </div>
 
-                <div class="col-sm-12 d-flex justify-content-between">
+                <div class="col-sm-12 d-flex justify-content-between ">
 
                     <div>
                         <h5>{{ __('admin.number_of_students_without_group') }} : {{ count($studentsWithoutGroup) }}</h5>
