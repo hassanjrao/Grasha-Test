@@ -152,7 +152,7 @@
             <div class="block-content pb-4">
                 <div class="col-sm-12 d-flex mb-4 justify-content-between ">
 
-                    <h5  class="mr-4">{{ __('admin.students_without_group') }} : </h5>
+                    <h5  style="margin-right: 30px !important">{{ __('admin.students_without_group') }} : </h5>
 
                     <div>
                         @foreach ($studentsWithoutGroup as $student)
