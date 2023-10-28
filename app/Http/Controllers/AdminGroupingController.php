@@ -77,12 +77,12 @@ class AdminGroupingController extends Controller
                     "name" => $tutor->name,
                     "tutor_id" => $tutor->id,
                     "learning_style_id" => $learningStyle->id,
-                    "learning_style_name" => $learningStyle->style_en
+                    "learning_style_name" => $learningStyle->style_es
                 ];
 
                 $tutorLearningStyles[$tutor->id] = [
                     "learning_style_id" => $learningStyle->id,
-                    "learning_style_name" => $learningStyle->style_en
+                    "learning_style_name" => $learningStyle->style_es
                 ];
             }
         }
@@ -130,7 +130,7 @@ class AdminGroupingController extends Controller
                                 "student_id" => $student->id,
                                 "student_name" => $student->name,
                                 "learning_style_id" => $learningStyle->id,
-                                "learning_style_name" => $learningStyle->style_en,
+                                "learning_style_name" => $learningStyle->style_es,
                                 "tutor_id" => $tutor["tutor_id"],
                                 "tutor_name" => $tutor["name"],
                             ];
@@ -149,7 +149,7 @@ class AdminGroupingController extends Controller
                     "student_id" => $student->id,
                     "student_name" => $student->name,
                     "learning_style_id" => $learningStyle->id,
-                    "learning_style_name" => $learningStyle->style_en,
+                    "learning_style_name" => $learningStyle->style_es,
                 ];
             }
         }
